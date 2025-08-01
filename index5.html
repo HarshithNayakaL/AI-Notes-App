@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Notes - Powered by DeepSeek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Light mode variables */
+            --primary-bg: #f8fafc;
+            --secondary-bg: #ffffff;
+            --sidebar-bg: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border-color: #e2e8f0;
+            --accent-color: #6366f1;
+            --accent-hover: #4f46e5;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --hover-bg: #f1f5f9;
+            --active-bg: #e0e7ff;
+            --active-border: #6366f1;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        [data-theme="dark"] {
+            /* Dark mode variables */
+            --primary-bg: #0f172a;
+            --secondary-bg: #1e293b;
+            --sidebar-bg: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --hover-bg: #334155;
+            --active-bg: rgba(99, 102, 241, 0.2);
+            --active-border: #6366f1;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.5;
+            height: 100vh;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .app-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            background: var(--border-color);
+            border-radius: 13px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        [data-theme="dark"] .theme-toggle {
+            background: var(--accent-color);
+        }
+
+        [data-theme="dark"] .theme-toggle::before {
+            transform: translateX(24px);
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 12px 12px 36px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .new-note-btn {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 24px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .new-note-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .notes-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .note-item {
+            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .note-item:hover {
+            background: var(--hover-bg);
+        }
+
+        .note-item.active {
+            background: var(--active-bg);
+            border-color: var(--active-border);
+        }
+
+        .note-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .note-preview {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .note-date {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            background: var(--secondary-bg);
+        }
+
+        .header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .ai-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .ai-status::before {
+            content: '●';
+            font-size: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        .ai-status.offline {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error-color);
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .editor-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .editor-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .note-title-input {
+            font-size: 18px;
+            font-weight: 600;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            flex: 1;
+            outline: none;
+        }
+
+        .note-title-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--secondary-bg);
+            color: var(--text-secondary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-btn:hover {
+            background: var(--hover-bg);
+            border-color: var(--accent-color);
+        }
+
+        .action-btn.ai-btn {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .action-btn.ai-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .editor-content {
+            flex: 1;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow: hidden;
+        }
+
+        .note-editor {
+            flex: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+            font-size: 15px;
+            line-height: 1.6;
+            font-family: inherit;
+            resize: none;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .note-editor:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .note-editor::placeholder {
+            color: var(--text-muted);
+        }
+
+        .ai-panel {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 16px;
+            display: none;
+        }
+
+        .ai-panel.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ai-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .suggestion-chip {
+            padding: 6px 12px;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .suggestion-chip:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .ai-response {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 16px;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateX(400px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-size: 14px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            border-color: var(--success-color);
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+
+        .toast.error {
+            border-color: var(--error-color);
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error-color);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    🤖 AI Notes
+                </div>
+                <button class="theme-toggle" id="themeToggle" title="Toggle theme"></button>
+            </div>
+            
+            <div class="search-container">
+                <div class="search-icon">🔍</div>
+                <input type="text" class="search-input" placeholder="Search notes..." id="searchInput">
+            </div>
+            
+            <button class="new-note-btn" id="newNoteBtn">
+                New Note
+            </button>
+            
+            <div class="notes-list" id="notesList">
+                <div class="note-item active">
+                    <div class="note-title">Ferrari</div>
+                    <div class="note-preview">Ferrari, the iconic Italian sports car...</div>
+                    <div class="note-date">Today</div>
+                </div>
+                
+                <div class="note-item">
+                    <div class="note-title">Quantum Computing</div>
+                    <div class="note-preview">A quantum computer is a type of...</div>
+                    <div class="note-date">Yesterday</div>
+                </div>
+                
+                <div class="note-item">
+                    <div class="note-title">Project Ideas</div>
+                    <div class="note-preview">Brainstorming session for the new...</div>
+                    <div class="note-date">2 days ago</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="header">
+                <div class="header-title">FERRARI</div>
+                <div class="ai-status" id="aiStatus">
+                    DeepSeek R1 Ready
+                </div>
+            </div>
+            
+            <div class="editor-container">
+                <div class="editor-header">
+                    <input type="text" class="note-title-input" placeholder="Untitled Note" id="noteTitleInput" value="FERRARI">
+                    <div class="editor-actions">
+                        <button class="action-btn" id="saveBtn">💾 Save</button>
+                        <button class="action-btn" id="deleteBtn">🗑️ Delete</button>
+                        <button class="action-btn ai-btn" id="aiBtn">✨ AI Assistant</button>
+                    </div>
+                </div>
+                
+                <div class="editor-content">
+                    <textarea class="note-editor" placeholder="Start writing your note..." id="noteEditor">Ferrari, the iconic Italian sports car manufacturer, is synonymous with luxury, speed, and racing heritage. Founded by Enzo Ferrari in 1939, the company initially focused on racing before expanding into the production of high-performance road cars. Ferrari's history is deeply intertwined with Formula 1, where Scuderia Ferrari is the most successful team, boasting numerous championships and a passionate fanbase. Beyond racing, Ferrari cars are known for their distinctive design, advanced technology, and the emotional connection they evoke. Each Ferrari represents a blend of artistry and engineering, making them coveted symbols of automotive excellence and a source of enduring fascination.</textarea>
+                    
+                    <div class="ai-panel" id="aiPanel">
+                        <div class="ai-suggestions">
+                            <div class="suggestion-chip" data-action="summarize">📄 Summarize</div>
+                            <div class="suggestion-chip" data-action="improve">✨ Improve Writing</div>
+                            <div class="suggestion-chip" data-action="expand">📝 Expand Ideas</div>
+                            <div class="suggestion-chip" data-action="questions">❓ Generate Questions</div>
+                            <div class="suggestion-chip" data-action="keywords">🏷️ Extract Keywords</div>
+                        </div>
+                        <div class="ai-response" id="aiResponse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class AINotesApp {
+            constructor() {
+                this.notes = this.loadNotes();
+                this.currentNote = null;
+                this.isAIConnected = false;
+                this.theme = this.loadTheme();
+                this.init();
+            }
+
+            init() {
+                this.applyTheme();
+                this.bindEvents();
+                this.renderNotesList();
+                this.checkAIConnection();
+                this.loadDefaultNote();
+            }
+
+            loadTheme() {
+                return localStorage.getItem('ai-notes-theme') || 'light';
+            }
+
+            saveTheme() {
+                localStorage.setItem('ai-notes-theme', this.theme);
+            }
+
+            applyTheme() {
+                document.body.setAttribute('data-theme', this.theme);
+            }
+
+            toggleTheme() {
+                this.theme = this.theme === 'light' ? 'dark' : 'light';
+                this.applyTheme();
+                this.saveTheme();
+            }
+
+            loadDefaultNote() {
+                if (this.notes.length === 0) {
+                    const defaultNote = {
+                        id: '1',
+                        title: 'Ferrari',
+                        content: `Ferrari, the iconic Italian sports car manufacturer, is synonymous with luxury, speed, and racing heritage. Founded by Enzo Ferrari in 1939, the company initially focused on racing before expanding into the production of high-performance road cars. Ferrari's history is deeply intertwined with Formula 1, where Scuderia Ferrari is the most successful team, boasting numerous championships and a passionate fanbase. Beyond racing, Ferrari cars are known for their distinctive design, advanced technology, and the emotional connection they evoke. Each Ferrari represents a blend of artistry and engineering, making them coveted symbols of automotive excellence and a source of enduring fascination.`,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    };
+                    
+                    this.notes = [defaultNote];
+                    this.currentNote = defaultNote;
+                    this.saveNotes();
+                } else {
+                    this.currentNote = this.notes[0];
+                }
+                
+                this.renderNotesList();
+            }
+
+            bindEvents() {
+                document.getElementById('themeToggle').addEventListener('click', () => {
+                    this.toggleTheme();
+                });
+
+                document.getElementById('newNoteBtn').addEventListener('click', () => {
+                    this.createNewNote();
+                });
+
+                document.getElementById('searchInput').addEventListener('input', (e) => {
+                    this.searchNotes(e.target.value);
+                });
+
+                document.getElementById('saveBtn').addEventListener('click', () => {
+                    this.saveCurrentNote();
+                });
+
+                document.getElementById('deleteBtn').addEventListener('click', () => {
+                    this.deleteCurrentNote();
+                });
+
+                document.getElementById('aiBtn').addEventListener('click', () => {
+                    this.toggleAIPanel();
+                });
+
+                document.querySelectorAll('.suggestion-chip').forEach(chip => {
+                    chip.addEventListener('click', (e) => {
+                        const action = e.target.dataset.action;
+                        this.processAIRequest(action);
+                    });
+                });
+
+                document.getElementById('noteEditor').addEventListener('input', () => {
+                    this.autoSave();
+                });
+
+                document.getElementById('noteTitleInput').addEventListener('input', () => {
+                    this.autoSave();
+                });
+
+                // Keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                    if (e.ctrlKey || e.metaKey) {
+                        switch(e.key) {
+                            case 's':
+                                e.preventDefault();
+                                this.saveCurrentNote();
+                                break;
+                            case 'n':
+                                e.preventDefault();
+                                this.createNewNote();
+                                break;
+                            case 'd':
+                                e.preventDefault();
+                                this.toggleTheme();
+                                break;
+                        }
+                    }
+                });
+            }
+
+            loadNotes() {
+                try {
+                    const notes = localStorage.getItem('ai-notes');
+                    return notes ? JSON.parse(notes) : [];
+                } catch (error) {
+                    console.error('Error loading notes:', error);
+                    return [];
+                }
+            }
+
+            saveNotes() {
+                try {
+                    localStorage.setItem('ai-notes', JSON.stringify(this.notes));
+                } catch (error) {
+                    console.error('Error saving notes:', error);
+                    this.showToast('Error saving notes', 'error');
+                }
+            }
+
+            createNewNote() {
+                const newNote = {
+                    id: Date.now().toString(),
+                    title: 'Untitled Note',
+                    content: '',
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString()
+                };
+
+                this.notes.unshift(newNote);
+                this.currentNote = newNote;
+                this.renderNotesList();
+                this.loadNoteInEditor(newNote);
+            }
+
+            selectNote(noteId) {
+                const note = this.notes.find(n => n.id === noteId);
+                if (note) {
+                    this.currentNote = note;
+                    this.loadNoteInEditor(note);
+                    this.updateActiveNote(noteId);
+                }
+            }
+
+            loadNoteInEditor(note) {
+                document.getElementById('noteTitleInput').value = note.title;
+                document.getElementById('noteEditor').value = note.content;
+                document.querySelector('.header-title').textContent = note.title.toUpperCase();
+                this.hideAIPanel();
+            }
+
+            saveCurrentNote() {
+                if (!this.currentNote) return;
+
+                const title = document.getElementById('noteTitleInput').value.trim() || 'Untitled Note';
+                const content = document.getElementById('noteEditor').value;
+
+                this.currentNote.title = title;
+                this.currentNote.content = content;
+                this.currentNote.updatedAt = new Date().toISOString();
+
+                document.querySelector('.header-title').textContent = title.toUpperCase();
+                
+                this.saveNotes();
+                this.renderNotesList();
+                this.updateActiveNote(this.currentNote.id);
+                this.showToast('Note saved successfully', 'success');
+            }
+
+            autoSave() {
+                if (this.currentNote) {
+                    clearTimeout(this.autoSaveTimeout);
+                    this.autoSaveTimeout = setTimeout(() => {
+                        this.saveCurrentNote();
+                    }, 1000);
+                }
+            }
+
+            deleteCurrentNote() {
+                if (!this.currentNote) return;
+
+                if (confirm('Are you sure you want to delete this note?')) {
+                    this.notes = this.notes.filter(n => n.id !== this.currentNote.id);
+                    this.currentNote = this.notes.length > 0 ? this.notes[0] : null;
+                    this.saveNotes();
+                    this.renderNotesList();
+                    
+                    if (this.currentNote) {
+                        this.loadNoteInEditor(this.currentNote);
+                    } else {
+                        document.getElementById('noteTitleInput').value = '';
+                        document.getElementById('noteEditor').value = '';
+                        document.querySelector('.header-title').textContent = 'AI NOTES';
+                    }
+                    
+                    this.showToast('Note deleted', 'success');
+                }
+            }
+
+            searchNotes(query) {
+                const filteredNotes = this.notes.filter(note => 
+                    note.title.toLowerCase().includes(query.toLowerCase()) ||
+                    note.content.toLowerCase().includes(query.toLowerCase())
+                );
+                this.renderNotesList(filteredNotes);
+            }
+
+            renderNotesList(notesToRender = this.notes) {
+                const notesList = document.getElementById('notesList');
+                
+                if (notesToRender.length === 0) {
+                    notesList.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 20px; font-size: 13px;">No notes found</div>';
+                    return;
+                }
+
+                notesList.innerHTML = notesToRender.map(note => `
+                    <div class="note-item ${this.currentNote?.id === note.id ? 'active' : ''}" 
+                         onclick="app.selectNote('${note.id}')">
+                        <div class="note-title">${this.escapeHtml(note.title)}</div>
+                        <div class="note-preview">${this.escapeHtml(note.content.substring(0, 100))}${note.content.length > 100 ? '...' : ''}</div>
+                        <div class="note-date">${this.formatDate(note.updatedAt)}</div>
+                    </div>
+                `).join('');
+            }
+
+            updateActiveNote(noteId) {
+                document.querySelectorAll('.note-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                const activeItem = document.querySelector(`[onclick="app.selectNote('${noteId}')"]`);
+                if (activeItem) {
+                    activeItem.classList.add('active');
+                }
+            }
+
+            toggleAIPanel() {
+                const aiPanel = document.getElementById('aiPanel');
+                aiPanel.classList.toggle('show');
+                
+                if (aiPanel.classList.contains('show') && !this.isAIConnected) {
+                    this.showToast('AI connection not available. Please ensure Ollama is running.', 'error');
+                }
+            }
+
+            hideAIPanel() {
+                document.getElementById('aiPanel').classList.remove('show');
+            }
+
+            async checkAIConnection() {
+                try {
+                    const response = await fetch('http://localhost:11434/api/tags');
+                    if (response.ok) {
+                        const data = await response.json();
+                        const hasDeepSeek = data.models?.some(model => 
+                            model.name.includes('deepseek-r1:1.5b')
+                        );
+                        
+                        this.isAIConnected = hasDeepSeek;
+                        this.updateAIStatus(hasDeepSeek);
+                    }
+                } catch (error) {
+                    this.isAIConnected = false;
+                    this.updateAIStatus(false);
+                }
+            }
+
+            updateAIStatus(connected) {
+                const status = document.getElementById('aiStatus');
+                if (connected) {
+                    status.textContent = 'DeepSeek R1 Ready';
+                    status.classList.remove('offline');
+                } else {
+                    status.textContent = 'AI Offline';
+                    status.classList.add('offline');
+                }
+            }
+
+            async processAIRequest(action) {
+                if (!this.isAIConnected) {
+                    this.showToast('AI is not connected. Please check Ollama setup.', 'error');
+                    return;
+                }
+
+                if (!this.currentNote || !this.currentNote.content.trim()) {
+                    this.showToast('Please add some content to your note first.', 'error');
+                    return;
+                }
+
+                const aiBtn = document.getElementById('aiBtn');
+                const aiResponse = document.getElementById('aiResponse');
+                
+                aiBtn.classList.add('loading');
+                aiBtn.textContent = '⏳ Processing...';
+                aiResponse.textContent = 'AI is thinking...';
+
+                try {
+                    const prompt = this.generatePrompt(action, this.currentNote.content);
+                    const response = await this.callOllama(prompt);
+                    
+                    aiResponse.textContent = response;
+                } catch (error) {
+                    console.error('AI request failed:', error);
+                    aiResponse.textContent = 'Sorry, I encountered an error while processing your request.';
+                    this.showToast('AI request failed', 'error');
+                } finally {
+                    aiBtn.classList.remove('loading');
+                    aiBtn.textContent = '✨ AI Assistant';
+                }
+            }
+
+            generatePrompt(action, content) {
+                const prompts = {
+                    summarize: `Please provide a concise summary of the following text:\n\n${content}`,
+                    improve: `Please improve the writing quality, clarity, and flow of this text while maintaining its original meaning:\n\n${content}`,
+                    expand: `Please expand on the ideas in this text, adding more details, examples, and insights:\n\n${content}`,
+                    questions: `Based on this text, generate 5 thoughtful questions that could help explore the topic deeper:\n\n${content}`,
+                    keywords: `Extract the main keywords and key concepts from this text:\n\n${content}`
+                };
+                
+                return prompts[action] || content;
+            }
+
+            async callOllama(prompt) {
+                const response = await fetch('http://localhost:11434/api/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        model: 'deepseek-r1:1.5b',
+                        prompt: prompt,
+                        stream: false
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.response;
+            }
+
+            showToast(message, type = 'success') {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.textContent = message;
+                document.body.appendChild(toast);
+
+                setTimeout(() => toast.classList.add('show'), 100);
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => document.body.removeChild(toast), 300);
+                }, 3000);
+            }
+
+            formatDate(dateString) {
+                const date = new Date(dateString);
+                const now = new Date();
+                const diffTime = Math.abs(now - date);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                if (diffDays === 1) return 'Today';
+                if (diffDays === 2) return 'Yesterday';
+                if (diffDays <= 7) return `${diffDays} days ago`;
+                
+                return date.toLocaleDateString();
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        }
+
+        // Initialize the app
+        const app = new AINotesApp();
+    </script>
+</body>
+</html>
