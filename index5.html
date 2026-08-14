@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Notes - Powered by DeepSeek</title>
+    <title>AI Notes — Local Archive</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%232A2318'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23D3A059' font-family='Georgia,serif'%3EA%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,91 +16,145 @@
         }
 
         :root {
-            /* Light mode variables */
-            --primary-bg: #f8fafc;
-            --secondary-bg: #ffffff;
-            --sidebar-bg: #f8fafc;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --border-color: #e2e8f0;
-            --accent-color: #6366f1;
-            --accent-hover: #4f46e5;
-            --success-color: #10b981;
-            --error-color: #ef4444;
-            --hover-bg: #f1f5f9;
-            --active-bg: #e0e7ff;
-            --active-border: #6366f1;
-            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --font-display: 'Special Elite', 'Courier New', monospace;
+            --font-body: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+            /* Light — "reading room" linen */
+            --bg: #ece4d3;
+            --surface: #f8f4e9;
+            --surface-2: #f1ead9;
+            --ink: #2a2318;
+            --ink-soft: #6e624c;
+            --ink-faint: #9c8f76;
+            --rule: #d9cdae;
+            --brass: #9c6b2e;
+            --brass-deep: #7c5323;
+            --brass-wash: rgba(156, 107, 46, 0.12);
+            --brass-ink: #fbf5e8;
+            --moss: #4c6b47;
+            --moss-wash: rgba(76, 107, 71, 0.12);
+            --rust: #9c3b2e;
+            --rust-wash: rgba(156, 59, 46, 0.12);
+            --shadow: 0 1px 2px rgba(42, 35, 24, 0.1);
+            --shadow-lg: 0 10px 28px rgba(42, 35, 24, 0.18);
+            --radius: 5px;
         }
 
         [data-theme="dark"] {
-            /* Dark mode variables */
-            --primary-bg: #0f172a;
-            --secondary-bg: #1e293b;
-            --sidebar-bg: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --hover-bg: #334155;
-            --active-bg: rgba(99, 102, 241, 0.2);
-            --active-border: #6366f1;
-            --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.3);
+            /* Dark — desk lamp at night */
+            --bg: #151b16;
+            --surface: #1e2620;
+            --surface-2: #232c25;
+            --ink: #ede6d3;
+            --ink-soft: #b9af98;
+            --ink-faint: #7c7461;
+            --rule: #333d33;
+            --brass: #d3a059;
+            --brass-deep: #e8b876;
+            --brass-wash: rgba(211, 160, 89, 0.16);
+            --brass-ink: #201607;
+            --moss: #8fb885;
+            --moss-wash: rgba(143, 184, 133, 0.16);
+            --rust: #d97862;
+            --rust-wash: rgba(217, 120, 98, 0.16);
+            --shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+            --shadow-lg: 0 14px 34px rgba(0, 0, 0, 0.5);
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--primary-bg);
-            color: var(--text-primary);
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--ink);
             line-height: 1.5;
             height: 100vh;
-            transition: all 0.3s ease;
+            overflow: hidden;
+            background-image:
+                radial-gradient(ellipse 900px 500px at 8% -10%, var(--brass-wash), transparent 60%),
+                radial-gradient(ellipse 700px 500px at 100% 110%, var(--brass-wash), transparent 55%);
+        }
+
+        button, input, textarea {
+            font-family: inherit;
+        }
+
+        ::selection {
+            background: var(--brass-wash);
+            color: var(--ink);
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--brass);
+            outline-offset: 2px;
+        }
+
+        /* ===== Shell ===== */
+        .app-shell {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            height: 100vh;
+        }
+
+        .topbar {
+            display: none;
+        }
+
+        .drawer-backdrop {
+            display: none;
+        }
+
+        /* ===== Sidebar / Card catalog ===== */
+        .sidebar {
+            background: var(--surface);
+            border-right: 1px solid var(--rule);
+            display: flex;
+            flex-direction: column;
+            padding: 22px 20px;
             overflow: hidden;
         }
 
-        .app-container {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            height: 100vh;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            background: var(--sidebar-bg);
-            border-right: 1px solid var(--border-color);
+        .brand {
             display: flex;
-            flex-direction: column;
-            padding: 24px;
-        }
-
-        .sidebar-header {
-            display: flex;
+            align-items: flex-start;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--rule);
         }
 
-        .logo {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--accent-color);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .brand-mark {
+            font-family: var(--font-display);
+            font-size: 17px;
+            letter-spacing: 0.03em;
+            color: var(--ink);
+            line-height: 1.3;
+        }
+
+        .brand-sub {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+            margin-top: 4px;
         }
 
         .theme-toggle {
             position: relative;
-            width: 50px;
-            height: 26px;
-            background: var(--border-color);
-            border-radius: 13px;
-            border: none;
+            width: 44px;
+            height: 24px;
+            flex-shrink: 0;
+            background: var(--surface-2);
+            border: 1px solid var(--rule);
+            border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background 0.2s ease, border-color 0.2s ease;
         }
 
         .theme-toggle::before {
@@ -104,78 +162,107 @@
             position: absolute;
             top: 2px;
             left: 2px;
-            width: 22px;
-            height: 22px;
-            background: white;
+            width: 18px;
+            height: 18px;
+            background: var(--brass);
             border-radius: 50%;
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        [data-theme="dark"] .theme-toggle {
-            background: var(--accent-color);
+            transition: transform 0.2s ease;
         }
 
         [data-theme="dark"] .theme-toggle::before {
-            transform: translateX(24px);
+            transform: translateX(20px);
         }
 
-        .search-container {
+        .search-slot {
             position: relative;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
-        .search-icon {
+        .search-slot::before {
+            content: '';
             position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 14px;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--brass);
+            border-radius: 2px 0 0 2px;
+            opacity: 0.5;
         }
 
         .search-input {
             width: 100%;
-            padding: 12px 12px 12px 36px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            background: var(--secondary-bg);
-            color: var(--text-primary);
-            font-size: 14px;
-            transition: all 0.2s ease;
+            padding: 10px 12px 10px 16px;
+            border: 1px solid var(--rule);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            background: var(--surface-2);
+            color: var(--ink);
+            font-family: var(--font-mono);
+            font-size: 12.5px;
+            letter-spacing: 0.02em;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
         }
 
         .search-input:focus {
             outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            border-color: var(--brass);
+            box-shadow: 0 0 0 3px var(--brass-wash);
         }
 
         .search-input::placeholder {
-            color: var(--text-muted);
+            color: var(--ink-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 11px;
         }
 
-        .new-note-btn {
+        .new-entry-btn {
             width: 100%;
-            padding: 12px 16px;
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
+            padding: 11px 14px;
+            background: var(--brass);
+            color: var(--brass-ink);
+            border: 1px solid var(--brass);
+            border-radius: var(--radius);
+            font-family: var(--font-mono);
+            font-size: 12px;
             font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
             cursor: pointer;
-            margin-bottom: 24px;
-            transition: all 0.2s ease;
+            margin-bottom: 18px;
+            transition: background 0.15s ease, transform 0.1s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
         }
 
-        .new-note-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
+        .new-entry-btn:hover {
+            background: var(--brass-deep);
+            border-color: var(--brass-deep);
+        }
+
+        .new-entry-btn:active {
+            transform: scale(0.98);
+        }
+
+        .list-label {
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .list-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--rule);
         }
 
         .notes-list {
@@ -183,40 +270,73 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 10px;
+            padding: 2px 2px 12px 2px;
+            margin: -2px;
         }
 
-        .note-item {
-            padding: 16px;
-            border-radius: 8px;
+        .note-card {
+            position: relative;
+            padding: 13px 14px 13px 34px;
+            border-radius: var(--radius);
             cursor: pointer;
-            transition: all 0.2s ease;
-            border: 1px solid transparent;
+            transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+            border: 1px solid var(--rule);
+            background: var(--surface-2);
         }
 
-        .note-item:hover {
-            background: var(--hover-bg);
+        .note-card::before {
+            content: '';
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1.5px solid var(--rule);
         }
 
-        .note-item.active {
-            background: var(--active-bg);
-            border-color: var(--active-border);
+        .note-card:hover {
+            border-color: var(--brass);
+            transform: translateX(2px);
+        }
+
+        .note-card.active {
+            background: var(--brass-wash);
+            border-color: var(--brass);
+        }
+
+        .note-card.active::before {
+            background: var(--brass);
+            border-color: var(--brass);
+        }
+
+        .note-number {
+            font-family: var(--font-display);
+            font-size: 10.5px;
+            letter-spacing: 0.04em;
+            color: var(--brass);
+            display: block;
+            margin-bottom: 4px;
         }
 
         .note-title {
-            font-size: 14px;
+            font-family: var(--font-body);
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 6px;
+            font-size: 14.5px;
+            color: var(--ink);
+            margin-bottom: 4px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
 
         .note-preview {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.4;
+            font-size: 12.5px;
+            color: var(--ink-soft);
+            line-height: 1.45;
             margin-bottom: 8px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -226,42 +346,101 @@
         }
 
         .note-date {
-            font-size: 12px;
-            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--ink-faint);
         }
 
-        /* Main Content */
+        .empty-list {
+            text-align: center;
+            color: var(--ink-faint);
+            padding: 30px 10px;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .sidebar-foot {
+            padding-top: 14px;
+            margin-top: 4px;
+            border-top: 1px solid var(--rule);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 0.05em;
+            color: var(--ink-faint);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .sidebar-foot .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--moss);
+            flex-shrink: 0;
+        }
+
+        /* ===== Main desk ===== */
         .main-content {
             display: flex;
             flex-direction: column;
-            background: var(--secondary-bg);
+            background: var(--bg);
+            min-width: 0;
         }
 
         .header {
-            padding: 24px;
-            border-bottom: 1px solid var(--border-color);
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--rule);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
+        }
+
+        .header-meta {
+            min-width: 0;
+        }
+
+        .header-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--brass);
+            margin-bottom: 3px;
         }
 
         .header-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--text-primary);
+            font-family: var(--font-display);
+            font-size: 19px;
+            letter-spacing: 0.02em;
+            color: var(--ink);
+            text-transform: uppercase;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .ai-status {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success-color);
+            gap: 7px;
+            padding: 7px 14px;
+            background: var(--moss-wash);
+            color: var(--moss);
             border-radius: 20px;
-            font-size: 13px;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            letter-spacing: 0.04em;
             font-weight: 500;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            border: 1px solid var(--moss);
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .ai-status::before {
@@ -271,14 +450,14 @@
         }
 
         .ai-status.offline {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--error-color);
-            border-color: rgba(239, 68, 68, 0.2);
+            background: var(--rust-wash);
+            color: var(--rust);
+            border-color: var(--rust);
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            50% { opacity: 0.45; }
         }
 
         .editor-container {
@@ -289,181 +468,258 @@
         }
 
         .editor-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid var(--border-color);
+            padding: 16px 30px;
+            border-bottom: 1px solid var(--rule);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
         }
 
         .note-title-input {
-            font-size: 18px;
+            font-family: var(--font-body);
+            font-size: 19px;
             font-weight: 600;
             background: transparent;
             border: none;
-            color: var(--text-primary);
+            color: var(--ink);
             flex: 1;
+            min-width: 160px;
             outline: none;
         }
 
         .note-title-input::placeholder {
-            color: var(--text-muted);
+            color: var(--ink-faint);
         }
 
         .editor-actions {
             display: flex;
             gap: 8px;
+            flex-wrap: wrap;
         }
 
         .action-btn {
-            padding: 8px 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            background: var(--secondary-bg);
-            color: var(--text-secondary);
-            font-size: 13px;
+            padding: 8px 14px;
+            border: 1px solid var(--rule);
+            border-radius: var(--radius);
+            background: var(--surface);
+            color: var(--ink-soft);
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 7px;
         }
 
         .action-btn:hover {
-            background: var(--hover-bg);
-            border-color: var(--accent-color);
+            border-color: var(--brass);
+            color: var(--ink);
+        }
+
+        .action-btn.danger:hover {
+            border-color: var(--rust);
+            color: var(--rust);
         }
 
         .action-btn.ai-btn {
-            background: var(--accent-color);
-            color: white;
-            border-color: var(--accent-color);
+            background: var(--brass);
+            color: var(--brass-ink);
+            border-color: var(--brass);
         }
 
         .action-btn.ai-btn:hover {
-            background: var(--accent-hover);
+            background: var(--brass-deep);
+            border-color: var(--brass-deep);
         }
 
         .editor-content {
             flex: 1;
-            padding: 24px;
+            padding: 22px 30px 26px;
             display: flex;
             flex-direction: column;
             gap: 16px;
-            overflow: hidden;
+            overflow-y: auto;
         }
 
         .note-editor {
             flex: 1;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            background: var(--secondary-bg);
-            color: var(--text-primary);
-            font-size: 15px;
-            line-height: 1.6;
-            font-family: inherit;
+            min-height: 220px;
+            border: 1px solid var(--rule);
+            border-radius: var(--radius);
+            padding: 22px 24px;
+            background: var(--surface);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-size: 15.5px;
+            line-height: 1.85;
             resize: none;
             outline: none;
-            transition: all 0.2s ease;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent calc(1.85em - 1px),
+                var(--rule) calc(1.85em - 1px),
+                var(--rule) calc(1.85em)
+            );
+            background-position: 0 8px;
         }
 
         .note-editor:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            border-color: var(--brass);
+            box-shadow: 0 0 0 3px var(--brass-wash);
         }
 
         .note-editor::placeholder {
-            color: var(--text-muted);
+            color: var(--ink-faint);
         }
 
+        /* ===== AI analysis card ===== */
         .ai-panel {
-            background: rgba(99, 102, 241, 0.05);
-            border: 1px solid var(--accent-color);
-            border-radius: 8px;
-            padding: 16px;
+            background: var(--surface);
+            border: 1px solid var(--brass);
+            border-radius: var(--radius);
+            padding: 0;
             display: none;
+            overflow: hidden;
+            box-shadow: var(--shadow);
         }
 
         .ai-panel.show {
             display: block;
-            animation: slideDown 0.3s ease;
+            animation: slideDown 0.25s ease;
         }
 
         @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
+            from { opacity: 0; transform: translateY(-8px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ai-panel-head {
+            padding: 10px 16px;
+            background: var(--brass-wash);
+            border-bottom: 1px solid var(--rule);
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--brass-deep);
+        }
+
+        [data-theme="dark"] .ai-panel-head {
+            color: var(--brass);
+        }
+
+        .ai-panel-body {
+            padding: 16px;
         }
 
         .ai-suggestions {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .suggestion-chip {
-            padding: 6px 12px;
-            background: var(--secondary-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            font-size: 12px;
-            color: var(--text-secondary);
+            padding: 7px 13px;
+            background: var(--surface-2);
+            border: 1px solid var(--rule);
+            border-radius: 3px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
         }
 
         .suggestion-chip:hover {
-            background: var(--accent-color);
-            color: white;
-            border-color: var(--accent-color);
+            background: var(--brass);
+            color: var(--brass-ink);
+            border-color: var(--brass);
         }
 
         .ai-response {
-            background: var(--secondary-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 12px;
-            font-size: 13px;
-            line-height: 1.5;
-            color: var(--text-primary);
+            background: var(--surface-2);
+            border: 1px dashed var(--rule);
+            border-radius: 3px;
+            padding: 14px 16px;
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--ink);
             white-space: pre-wrap;
         }
 
+        .ai-response:empty {
+            display: none;
+        }
+
+        /* ===== Empty state ===== */
         .empty-state {
-            display: flex;
+            display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100%;
+            flex: 1;
             text-align: center;
+            padding: 40px;
+        }
+
+        .empty-state.show {
+            display: flex;
+        }
+
+        .empty-mark {
+            font-family: var(--font-display);
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            color: var(--brass);
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
         .empty-state h3 {
+            font-family: var(--font-body);
             font-size: 20px;
-            color: var(--text-primary);
+            font-weight: 600;
+            color: var(--ink);
             margin-bottom: 8px;
         }
 
         .empty-state p {
-            color: var(--text-muted);
+            color: var(--ink-soft);
             font-size: 14px;
+            max-width: 320px;
         }
 
+        /* ===== Toast ===== */
         .toast {
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 12px 16px;
-            background: var(--secondary-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-primary);
+            padding: 12px 18px;
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-left: 3px solid var(--brass);
+            border-radius: var(--radius);
+            color: var(--ink);
             box-shadow: var(--shadow-lg);
-            transform: translateX(400px);
-            transition: all 0.3s ease;
+            transform: translateX(420px);
+            transition: transform 0.3s ease;
             z-index: 1000;
-            font-size: 14px;
+            font-family: var(--font-mono);
+            font-size: 12.5px;
+            letter-spacing: 0.02em;
+            max-width: min(340px, calc(100vw - 40px));
         }
 
         .toast.show {
@@ -471,20 +727,16 @@
         }
 
         .toast.success {
-            border-color: var(--success-color);
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--success-color);
+            border-left-color: var(--moss);
         }
 
         .toast.error {
-            border-color: var(--error-color);
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--error-color);
+            border-left-color: var(--rust);
         }
 
-        /* Scrollbar */
+        /* ===== Scrollbar ===== */
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 7px;
         }
 
         ::-webkit-scrollbar-track {
@@ -492,97 +744,225 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 3px;
+            background: var(--rule);
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-muted);
+            background: var(--ink-faint);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .app-container {
-                grid-template-columns: 1fr;
+        /* ===== Reduced motion ===== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
             }
-            
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 860px) {
+            .app-shell {
+                grid-template-columns: 1fr;
+                height: calc(100vh - 54px);
+                margin-top: 54px;
+            }
+
+            .topbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 54px;
+                padding: 0 16px;
+                background: var(--surface);
+                border-bottom: 1px solid var(--rule);
+                z-index: 30;
+            }
+
+            .topbar-brand {
+                font-family: var(--font-display);
+                font-size: 14px;
+                letter-spacing: 0.02em;
+                color: var(--ink);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .drawer-toggle {
+                width: 36px;
+                height: 36px;
+                border-radius: var(--radius);
+                border: 1px solid var(--rule);
+                background: var(--surface-2);
+                color: var(--ink);
+                cursor: pointer;
+                font-family: var(--font-mono);
+                font-size: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .topbar-right {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                flex-shrink: 0;
+            }
+
             .sidebar {
+                position: fixed;
+                top: 54px;
+                left: 0;
+                bottom: 0;
+                width: min(320px, 84vw);
+                z-index: 25;
+                transform: translateX(-100%);
+                transition: transform 0.25s ease;
+                box-shadow: var(--shadow-lg);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .brand {
                 display: none;
+            }
+
+            .drawer-backdrop {
+                display: block;
+                position: fixed;
+                inset: 54px 0 0 0;
+                background: rgba(20, 16, 8, 0.35);
+                z-index: 20;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s ease;
+            }
+
+            .drawer-backdrop.show {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .header {
+                padding: 16px 18px;
+            }
+
+            .editor-header {
+                padding: 14px 18px;
+            }
+
+            .editor-content {
+                padding: 18px 18px 22px;
+            }
+
+            .header-title {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .editor-actions .action-btn span.label {
+                display: none;
+            }
+
+            .action-btn {
+                padding: 9px 11px;
+            }
+
+            .note-editor {
+                padding: 16px 16px;
+                font-size: 15px;
             }
         }
     </style>
 </head>
 <body data-theme="light">
-    <div class="app-container">
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    🤖 AI Notes
-                </div>
-                <button class="theme-toggle" id="themeToggle" title="Toggle theme"></button>
-            </div>
-            
-            <div class="search-container">
-                <div class="search-icon">🔍</div>
-                <input type="text" class="search-input" placeholder="Search notes..." id="searchInput">
-            </div>
-            
-            <button class="new-note-btn" id="newNoteBtn">
-                New Note
-            </button>
-            
-            <div class="notes-list" id="notesList">
-                <div class="note-item active">
-                    <div class="note-title">Ferrari</div>
-                    <div class="note-preview">Ferrari, the iconic Italian sports car...</div>
-                    <div class="note-date">Today</div>
-                </div>
-                
-                <div class="note-item">
-                    <div class="note-title">Quantum Computing</div>
-                    <div class="note-preview">A quantum computer is a type of...</div>
-                    <div class="note-date">Yesterday</div>
-                </div>
-                
-                <div class="note-item">
-                    <div class="note-title">Project Ideas</div>
-                    <div class="note-preview">Brainstorming session for the new...</div>
-                    <div class="note-date">2 days ago</div>
-                </div>
-            </div>
+    <div class="topbar">
+        <button class="drawer-toggle" id="drawerToggle" aria-label="Open notes list" aria-expanded="false">☰</button>
+        <div class="topbar-brand">AI NOTES</div>
+        <div class="topbar-right">
+            <button class="theme-toggle" id="themeToggleMobile" title="Toggle theme" aria-label="Toggle light and dark theme"></button>
         </div>
-        
+    </div>
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+    <div class="app-shell">
+        <aside class="sidebar" id="sidebar">
+            <div class="brand">
+                <div class="brand-mark">
+                    AI NOTES
+                    <span class="brand-sub">Local Archive · DeepSeek R1</span>
+                </div>
+                <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle light and dark theme"></button>
+            </div>
+
+            <div class="search-slot">
+                <input type="text" class="search-input" placeholder="SEARCH ENTRIES…" id="searchInput" aria-label="Search notes">
+            </div>
+
+            <button class="new-entry-btn" id="newNoteBtn">
+                <span>+</span> New Entry
+            </button>
+
+            <div class="list-label">Catalog</div>
+
+            <div class="notes-list" id="notesList"></div>
+
+            <div class="sidebar-foot"><span class="dot"></span> Stored on this device</div>
+        </aside>
+
         <div class="main-content">
             <div class="header">
-                <div class="header-title">FERRARI</div>
-                <div class="ai-status" id="aiStatus">
-                    DeepSeek R1 Ready
+                <div class="header-meta">
+                    <div class="header-eyebrow" id="headerEyebrow">N°01 · ENTRY</div>
+                    <div class="header-title" id="headerTitle">FERRARI</div>
                 </div>
+                <div class="ai-status" id="aiStatus">DeepSeek R1 Ready</div>
             </div>
-            
+
             <div class="editor-container">
-                <div class="editor-header">
-                    <input type="text" class="note-title-input" placeholder="Untitled Note" id="noteTitleInput" value="FERRARI">
+                <div class="editor-header" id="editorHeader">
+                    <input type="text" class="note-title-input" placeholder="Untitled Entry" id="noteTitleInput" value="Ferrari">
                     <div class="editor-actions">
-                        <button class="action-btn" id="saveBtn">💾 Save</button>
-                        <button class="action-btn" id="deleteBtn">🗑️ Delete</button>
-                        <button class="action-btn ai-btn" id="aiBtn">✨ AI Assistant</button>
+                        <button class="action-btn" id="saveBtn" aria-label="Save note"><span>💾</span><span class="label">Save</span></button>
+                        <button class="action-btn danger" id="deleteBtn" aria-label="Delete note"><span>🗑</span><span class="label">Delete</span></button>
+                        <button class="action-btn ai-btn" id="aiBtn" aria-label="Open AI assistant"><span>✦</span><span class="label">Ask Archive</span></button>
                     </div>
                 </div>
-                
-                <div class="editor-content">
-                    <textarea class="note-editor" placeholder="Start writing your note..." id="noteEditor">Ferrari, the iconic Italian sports car manufacturer, is synonymous with luxury, speed, and racing heritage. Founded by Enzo Ferrari in 1939, the company initially focused on racing before expanding into the production of high-performance road cars. Ferrari's history is deeply intertwined with Formula 1, where Scuderia Ferrari is the most successful team, boasting numerous championships and a passionate fanbase. Beyond racing, Ferrari cars are known for their distinctive design, advanced technology, and the emotional connection they evoke. Each Ferrari represents a blend of artistry and engineering, making them coveted symbols of automotive excellence and a source of enduring fascination.</textarea>
-                    
+
+                <div class="editor-content" id="editorContent">
+                    <textarea class="note-editor" placeholder="Start writing your note…" id="noteEditor">Ferrari, the iconic Italian sports car manufacturer, is synonymous with luxury, speed, and racing heritage. Founded by Enzo Ferrari in 1939, the company initially focused on racing before expanding into the production of high-performance road cars. Ferrari's history is deeply intertwined with Formula 1, where Scuderia Ferrari is the most successful team, boasting numerous championships and a passionate fanbase. Beyond racing, Ferrari cars are known for their distinctive design, advanced technology, and the emotional connection they evoke. Each Ferrari represents a blend of artistry and engineering, making them coveted symbols of automotive excellence and a source of enduring fascination.</textarea>
+
                     <div class="ai-panel" id="aiPanel">
-                        <div class="ai-suggestions">
-                            <div class="suggestion-chip" data-action="summarize">📄 Summarize</div>
-                            <div class="suggestion-chip" data-action="improve">✨ Improve Writing</div>
-                            <div class="suggestion-chip" data-action="expand">📝 Expand Ideas</div>
-                            <div class="suggestion-chip" data-action="questions">❓ Generate Questions</div>
-                            <div class="suggestion-chip" data-action="keywords">🏷️ Extract Keywords</div>
+                        <div class="ai-panel-head">Field Analysis — AI Assistant</div>
+                        <div class="ai-panel-body">
+                            <div class="ai-suggestions">
+                                <div class="suggestion-chip" data-action="summarize">Summarize</div>
+                                <div class="suggestion-chip" data-action="improve">Improve Writing</div>
+                                <div class="suggestion-chip" data-action="expand">Expand Ideas</div>
+                                <div class="suggestion-chip" data-action="questions">Generate Questions</div>
+                                <div class="suggestion-chip" data-action="keywords">Extract Keywords</div>
+                            </div>
+                            <div class="ai-response" id="aiResponse"></div>
                         </div>
-                        <div class="ai-response" id="aiResponse"></div>
                     </div>
+                </div>
+
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-mark">N°00</div>
+                    <h3>No entry selected</h3>
+                    <p>Choose an entry from the catalog, or start a new one to begin writing.</p>
                 </div>
             </div>
         </div>
@@ -601,7 +981,6 @@
             init() {
                 this.applyTheme();
                 this.bindEvents();
-                this.renderNotesList();
                 this.checkAIConnection();
                 this.loadDefaultNote();
             }
@@ -633,19 +1012,24 @@
                         createdAt: new Date().toISOString(),
                         updatedAt: new Date().toISOString()
                     };
-                    
+
                     this.notes = [defaultNote];
                     this.currentNote = defaultNote;
                     this.saveNotes();
                 } else {
                     this.currentNote = this.notes[0];
                 }
-                
+
                 this.renderNotesList();
+                this.loadNoteInEditor(this.currentNote);
             }
 
             bindEvents() {
                 document.getElementById('themeToggle').addEventListener('click', () => {
+                    this.toggleTheme();
+                });
+
+                document.getElementById('themeToggleMobile').addEventListener('click', () => {
                     this.toggleTheme();
                 });
 
@@ -684,6 +1068,15 @@
                     this.autoSave();
                 });
 
+                const drawerToggle = document.getElementById('drawerToggle');
+                const drawerBackdrop = document.getElementById('drawerBackdrop');
+                if (drawerToggle) {
+                    drawerToggle.addEventListener('click', () => this.toggleDrawer());
+                }
+                if (drawerBackdrop) {
+                    drawerBackdrop.addEventListener('click', () => this.closeDrawer());
+                }
+
                 // Keyboard shortcuts
                 document.addEventListener('keydown', (e) => {
                     if (e.ctrlKey || e.metaKey) {
@@ -703,6 +1096,32 @@
                         }
                     }
                 });
+            }
+
+            toggleDrawer() {
+                const sidebar = document.getElementById('sidebar');
+                const isOpen = sidebar.classList.contains('open');
+                if (isOpen) {
+                    this.closeDrawer();
+                } else {
+                    this.openDrawer();
+                }
+            }
+
+            openDrawer() {
+                document.getElementById('sidebar').classList.add('open');
+                document.getElementById('drawerBackdrop').classList.add('show');
+                document.getElementById('drawerToggle').setAttribute('aria-expanded', 'true');
+            }
+
+            closeDrawer() {
+                document.getElementById('sidebar').classList.remove('open');
+                document.getElementById('drawerBackdrop').classList.remove('show');
+                document.getElementById('drawerToggle').setAttribute('aria-expanded', 'false');
+            }
+
+            isMobile() {
+                return window.innerWidth <= 860;
             }
 
             loadNotes() {
@@ -727,7 +1146,7 @@
             createNewNote() {
                 const newNote = {
                     id: Date.now().toString(),
-                    title: 'Untitled Note',
+                    title: 'Untitled Entry',
                     content: '',
                     createdAt: new Date().toISOString(),
                     updatedAt: new Date().toISOString()
@@ -737,6 +1156,7 @@
                 this.currentNote = newNote;
                 this.renderNotesList();
                 this.loadNoteInEditor(newNote);
+                if (this.isMobile()) this.closeDrawer();
             }
 
             selectNote(noteId) {
@@ -744,33 +1164,52 @@
                 if (note) {
                     this.currentNote = note;
                     this.loadNoteInEditor(note);
-                    this.updateActiveNote(noteId);
+                    this.renderNotesList();
+                    if (this.isMobile()) this.closeDrawer();
                 }
             }
 
             loadNoteInEditor(note) {
+                const editorHeader = document.getElementById('editorHeader');
+                const editorContent = document.getElementById('editorContent');
+                const emptyState = document.getElementById('emptyState');
+
+                if (!note) {
+                    editorHeader.style.display = 'none';
+                    editorContent.style.display = 'none';
+                    emptyState.classList.add('show');
+                    document.getElementById('headerTitle').textContent = 'AI NOTES';
+                    document.getElementById('headerEyebrow').textContent = 'ARCHIVE';
+                    return;
+                }
+
+                editorHeader.style.display = '';
+                editorContent.style.display = '';
+                emptyState.classList.remove('show');
+
                 document.getElementById('noteTitleInput').value = note.title;
                 document.getElementById('noteEditor').value = note.content;
-                document.querySelector('.header-title').textContent = note.title.toUpperCase();
+                document.getElementById('headerTitle').textContent = note.title.toUpperCase();
+                const index = this.notes.findIndex(n => n.id === note.id);
+                document.getElementById('headerEyebrow').textContent = `N°${String(index + 1).padStart(2, '0')} · ENTRY`;
                 this.hideAIPanel();
             }
 
             saveCurrentNote() {
                 if (!this.currentNote) return;
 
-                const title = document.getElementById('noteTitleInput').value.trim() || 'Untitled Note';
+                const title = document.getElementById('noteTitleInput').value.trim() || 'Untitled Entry';
                 const content = document.getElementById('noteEditor').value;
 
                 this.currentNote.title = title;
                 this.currentNote.content = content;
                 this.currentNote.updatedAt = new Date().toISOString();
 
-                document.querySelector('.header-title').textContent = title.toUpperCase();
-                
+                document.getElementById('headerTitle').textContent = title.toUpperCase();
+
                 this.saveNotes();
                 this.renderNotesList();
-                this.updateActiveNote(this.currentNote.id);
-                this.showToast('Note saved successfully', 'success');
+                this.showToast('Entry saved', 'success');
             }
 
             autoSave() {
@@ -785,26 +1224,18 @@
             deleteCurrentNote() {
                 if (!this.currentNote) return;
 
-                if (confirm('Are you sure you want to delete this note?')) {
+                if (confirm('Are you sure you want to delete this entry?')) {
                     this.notes = this.notes.filter(n => n.id !== this.currentNote.id);
                     this.currentNote = this.notes.length > 0 ? this.notes[0] : null;
                     this.saveNotes();
                     this.renderNotesList();
-                    
-                    if (this.currentNote) {
-                        this.loadNoteInEditor(this.currentNote);
-                    } else {
-                        document.getElementById('noteTitleInput').value = '';
-                        document.getElementById('noteEditor').value = '';
-                        document.querySelector('.header-title').textContent = 'AI NOTES';
-                    }
-                    
-                    this.showToast('Note deleted', 'success');
+                    this.loadNoteInEditor(this.currentNote);
+                    this.showToast('Entry deleted', 'success');
                 }
             }
 
             searchNotes(query) {
-                const filteredNotes = this.notes.filter(note => 
+                const filteredNotes = this.notes.filter(note =>
                     note.title.toLowerCase().includes(query.toLowerCase()) ||
                     note.content.toLowerCase().includes(query.toLowerCase())
                 );
@@ -813,36 +1244,27 @@
 
             renderNotesList(notesToRender = this.notes) {
                 const notesList = document.getElementById('notesList');
-                
+
                 if (notesToRender.length === 0) {
-                    notesList.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 20px; font-size: 13px;">No notes found</div>';
+                    notesList.innerHTML = '<div class="empty-list">No entries found</div>';
                     return;
                 }
 
-                notesList.innerHTML = notesToRender.map(note => `
-                    <div class="note-item ${this.currentNote?.id === note.id ? 'active' : ''}" 
+                notesList.innerHTML = notesToRender.map((note, i) => `
+                    <div class="note-card ${this.currentNote?.id === note.id ? 'active' : ''}"
                          onclick="app.selectNote('${note.id}')">
+                        <span class="note-number">N°${String(i + 1).padStart(2, '0')}</span>
                         <div class="note-title">${this.escapeHtml(note.title)}</div>
-                        <div class="note-preview">${this.escapeHtml(note.content.substring(0, 100))}${note.content.length > 100 ? '...' : ''}</div>
+                        <div class="note-preview">${this.escapeHtml(note.content.substring(0, 100))}${note.content.length > 100 ? '…' : ''}</div>
                         <div class="note-date">${this.formatDate(note.updatedAt)}</div>
                     </div>
                 `).join('');
             }
 
-            updateActiveNote(noteId) {
-                document.querySelectorAll('.note-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                const activeItem = document.querySelector(`[onclick="app.selectNote('${noteId}')"]`);
-                if (activeItem) {
-                    activeItem.classList.add('active');
-                }
-            }
-
             toggleAIPanel() {
                 const aiPanel = document.getElementById('aiPanel');
                 aiPanel.classList.toggle('show');
-                
+
                 if (aiPanel.classList.contains('show') && !this.isAIConnected) {
                     this.showToast('AI connection not available. Please ensure Ollama is running.', 'error');
                 }
@@ -857,10 +1279,10 @@
                     const response = await fetch('http://localhost:11434/api/tags');
                     if (response.ok) {
                         const data = await response.json();
-                        const hasDeepSeek = data.models?.some(model => 
+                        const hasDeepSeek = data.models?.some(model =>
                             model.name.includes('deepseek-r1:1.5b')
                         );
-                        
+
                         this.isAIConnected = hasDeepSeek;
                         this.updateAIStatus(hasDeepSeek);
                     }
@@ -894,15 +1316,14 @@
 
                 const aiBtn = document.getElementById('aiBtn');
                 const aiResponse = document.getElementById('aiResponse');
-                
+
                 aiBtn.classList.add('loading');
-                aiBtn.textContent = '⏳ Processing...';
-                aiResponse.textContent = 'AI is thinking...';
+                aiResponse.textContent = 'AI is thinking…';
 
                 try {
                     const prompt = this.generatePrompt(action, this.currentNote.content);
                     const response = await this.callOllama(prompt);
-                    
+
                     aiResponse.textContent = response;
                 } catch (error) {
                     console.error('AI request failed:', error);
@@ -910,7 +1331,6 @@
                     this.showToast('AI request failed', 'error');
                 } finally {
                     aiBtn.classList.remove('loading');
-                    aiBtn.textContent = '✨ AI Assistant';
                 }
             }
 
@@ -922,7 +1342,7 @@
                     questions: `Based on this text, generate 5 thoughtful questions that could help explore the topic deeper:\n\n${content}`,
                     keywords: `Extract the main keywords and key concepts from this text:\n\n${content}`
                 };
-                
+
                 return prompts[action] || content;
             }
 
@@ -966,10 +1386,10 @@
                 const diffTime = Math.abs(now - date);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-                if (diffDays === 1) return 'Today';
+                if (diffDays <= 1) return 'Today';
                 if (diffDays === 2) return 'Yesterday';
                 if (diffDays <= 7) return `${diffDays} days ago`;
-                
+
                 return date.toLocaleDateString();
             }
 
