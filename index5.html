@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Notes - Powered by DeepSeek</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>AI Notes — Powered by DeepSeek</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%236d5dfc'/%3E%3Cstop offset='55%25' stop-color='%23b366ff'/%3E%3Cstop offset='100%25' stop-color='%23ff5fa2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='24' height='24' rx='6' fill='url(%23g)'/%3E%3Cpath fill='white' d='M12 4c.3 2.7.9 4.4 2 5.4 1.1 1.1 2.7 1.7 5.4 2-2.7.3-4.4.9-5.4 2-1.1 1.1-1.7 2.7-2 5.4-.3-2.7-.9-4.4-2-5.4-1.1-1.1-2.7-1.7-5.4-2 2.7-.3 4.4-.9 5.4-2 1.1-1.1 1.7-2.7 2-5.4z'/%3E%3C/svg%3E">
     <style>
         * {
             margin: 0;
@@ -12,190 +13,374 @@
         }
 
         :root {
-            /* Light mode variables */
-            --primary-bg: #f8fafc;
+            /* Radii */
+            --radius-sm: 10px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --radius-full: 999px;
+
+            /* Spacing (8px grid) */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 20px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-10: 40px;
+
+            /* Motion */
+            --duration-fast: 150ms;
+            --duration-base: 300ms;
+            --duration-slow: 550ms;
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-out: cubic-bezier(0, 0, 0.2, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+            /* Accent gradient — poppy but restrained */
+            --accent-1: #6d5dfc;
+            --accent-2: #b366ff;
+            --accent-3: #ff5fa2;
+            --accent-gradient: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 55%, var(--accent-3) 100%);
+
+            /* Light mode */
+            --primary-bg: #f0f0f4;
             --secondary-bg: #ffffff;
-            --sidebar-bg: #f8fafc;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --border-color: #e2e8f0;
-            --accent-color: #6366f1;
-            --accent-hover: #4f46e5;
-            --success-color: #10b981;
-            --error-color: #ef4444;
-            --hover-bg: #f1f5f9;
-            --active-bg: #e0e7ff;
-            --active-border: #6366f1;
-            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
+            --tertiary-bg: #f5f5f7;
+            --sidebar-bg: rgba(255, 255, 255, 0.68);
+            --text-primary: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --text-muted: #a1a1a6;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --accent-color: #6d5dfc;
+            --accent-hover: #5a48f0;
+            --success-color: #2fb350;
+            --error-color: #ff453a;
+            --hover-bg: rgba(0, 0, 0, 0.045);
+            --active-bg: rgba(109, 93, 252, 0.1);
+            --active-border: var(--accent-color);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 16px 44px rgba(0, 0, 0, 0.14);
         }
 
         [data-theme="dark"] {
-            /* Dark mode variables */
-            --primary-bg: #0f172a;
-            --secondary-bg: #1e293b;
-            --sidebar-bg: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --hover-bg: #334155;
-            --active-bg: rgba(99, 102, 241, 0.2);
-            --active-border: #6366f1;
-            --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --primary-bg: #000000;
+            --secondary-bg: #1c1c1e;
+            --tertiary-bg: #2c2c2e;
+            --sidebar-bg: rgba(28, 28, 30, 0.66);
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1a6;
+            --text-muted: #6e6e73;
+            --border-color: rgba(255, 255, 255, 0.09);
+            --accent-color: #a390ff;
+            --accent-hover: #b7a5ff;
+            --success-color: #32d74b;
+            --error-color: #ff6961;
+            --hover-bg: rgba(255, 255, 255, 0.06);
+            --active-bg: rgba(163, 144, 255, 0.16);
+            --active-border: var(--accent-color);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.35);
+            --shadow-lg: 0 16px 44px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        html {
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
             background: var(--primary-bg);
             color: var(--text-primary);
             line-height: 1.5;
             height: 100vh;
-            transition: all 0.3s ease;
             overflow: hidden;
+            transition: background var(--duration-base) var(--ease), color var(--duration-base) var(--ease);
         }
+
+        button, input, textarea {
+            font-family: inherit;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+            border-radius: var(--radius-sm);
+        }
+
+        svg { display: block; }
 
         .app-container {
             display: grid;
-            grid-template-columns: 300px 1fr;
+            grid-template-columns: 340px 1fr;
+            gap: var(--space-4);
             height: 100vh;
+            padding: var(--space-4);
+        }
+
+        /* Mobile menu + overlay */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: var(--space-4);
+            left: var(--space-4);
+            z-index: 2100;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            background: var(--sidebar-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: transform var(--duration-fast) var(--ease);
+        }
+
+        .mobile-menu-btn:active { transform: scale(0.92); }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(2px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--duration-base) var(--ease);
+            z-index: 1999;
+        }
+
+        .sidebar-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         /* Sidebar */
         .sidebar {
             background: var(--sidebar-bg);
-            border-right: 1px solid var(--border-color);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
             display: flex;
             flex-direction: column;
-            padding: 24px;
+            padding: var(--space-5);
+            min-width: 0;
+            overflow: hidden;
         }
 
         .sidebar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
+            margin-bottom: var(--space-5);
         }
 
         .logo {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
-            color: var(--accent-color);
+            letter-spacing: -0.01em;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: var(--space-2);
+        }
+
+        .logo-mark {
+            width: 30px;
+            height: 30px;
+            border-radius: 9px;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(109, 93, 252, 0.35);
+        }
+
+        .logo-mark svg { width: 16px; height: 16px; }
+
+        .logo-text {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .theme-toggle {
             position: relative;
-            width: 50px;
-            height: 26px;
-            background: var(--border-color);
-            border-radius: 13px;
-            border: none;
+            width: 52px;
+            height: 28px;
+            background: var(--tertiary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background var(--duration-base) var(--ease);
+            flex-shrink: 0;
         }
 
-        .theme-toggle::before {
-            content: '';
+        .toggle-thumb {
             position: absolute;
             top: 2px;
             left: 2px;
             width: 22px;
             height: 22px;
-            background: white;
             border-radius: 50%;
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            background: var(--secondary-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+            transition: transform var(--duration-base) var(--ease-spring);
         }
 
-        [data-theme="dark"] .theme-toggle {
-            background: var(--accent-color);
-        }
+        .toggle-thumb svg { width: 13px; height: 13px; }
+        .toggle-thumb .icon-moon { display: none; }
 
-        [data-theme="dark"] .theme-toggle::before {
-            transform: translateX(24px);
-        }
+        [data-theme="dark"] .theme-toggle { background: var(--accent-color); }
+        [data-theme="dark"] .toggle-thumb { transform: translateX(24px); }
+        [data-theme="dark"] .toggle-thumb .icon-sun { display: none; }
+        [data-theme="dark"] .toggle-thumb .icon-moon { display: block; }
 
         .search-container {
             position: relative;
-            margin-bottom: 16px;
+            margin-bottom: var(--space-3);
         }
 
         .search-icon {
             position: absolute;
-            left: 12px;
+            left: 14px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
-            font-size: 14px;
+            width: 16px;
+            height: 16px;
+            pointer-events: none;
         }
 
         .search-input {
             width: 100%;
-            padding: 12px 12px 12px 36px;
+            padding: 11px 14px 11px 40px;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: var(--radius-full);
             background: var(--secondary-bg);
             color: var(--text-primary);
             font-size: 14px;
-            transition: all 0.2s ease;
+            transition: box-shadow var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease);
         }
 
         .search-input:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(109, 93, 252, 0.14);
         }
 
-        .search-input::placeholder {
-            color: var(--text-muted);
-        }
+        .search-input::placeholder { color: var(--text-muted); }
 
         .new-note-btn {
             width: 100%;
             padding: 12px 16px;
-            background: var(--accent-color);
+            background: var(--accent-gradient);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: var(--radius-full);
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            margin-bottom: 24px;
-            transition: all 0.2s ease;
+            margin-bottom: var(--space-5);
+            transition: transform var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: var(--space-2);
+            min-height: 44px;
+            box-shadow: 0 6px 20px rgba(109, 93, 252, 0.28);
         }
+
+        .new-note-btn svg { width: 16px; height: 16px; }
 
         .new-note-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 26px rgba(109, 93, 252, 0.4);
         }
 
+        .new-note-btn:active { transform: translateY(0); }
+
+        /* Stats bento row */
+        .sidebar-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2);
+            margin-bottom: var(--space-5);
+        }
+
+        .stat-tile {
+            background: var(--tertiary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-3);
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-top: 2px;
+        }
+
+        /* Notes list — bento grid */
         .notes-list {
             flex: 1;
             overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2);
+            align-content: start;
+            padding-bottom: var(--space-2);
         }
 
         .note-item {
-            padding: 16px;
-            border-radius: 8px;
+            padding: var(--space-3);
+            border-radius: var(--radius-md);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: transform var(--duration-fast) var(--ease), background var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease);
             border: 1px solid transparent;
+            background: var(--secondary-bg);
+            animation: fadeInUp var(--duration-base) var(--ease-out) both;
+        }
+
+        .notes-list .note-item:first-child {
+            grid-column: 1 / -1;
         }
 
         .note-item:hover {
             background: var(--hover-bg);
+            transform: translateY(-2px);
         }
 
         .note-item.active {
@@ -207,17 +392,17 @@
             font-size: 14px;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 6px;
+            margin-bottom: var(--space-1);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
 
         .note-preview {
-            font-size: 13px;
+            font-size: 12.5px;
             color: var(--text-secondary);
-            line-height: 1.4;
-            margin-bottom: 8px;
+            line-height: 1.45;
+            margin-bottom: var(--space-2);
             display: -webkit-box;
             -webkit-line-clamp: 2;
             line-clamp: 2;
@@ -226,8 +411,14 @@
         }
 
         .note-date {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Main Content */
@@ -235,50 +426,65 @@
             display: flex;
             flex-direction: column;
             background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            min-width: 0;
+            overflow: hidden;
         }
 
         .header {
-            padding: 24px;
+            padding: var(--space-6);
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: var(--space-4);
         }
 
         .header-title {
-            font-size: 24px;
+            font-size: clamp(20px, 2vw + 12px, 28px);
             font-weight: 700;
+            letter-spacing: -0.02em;
             color: var(--text-primary);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .ai-status {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: var(--space-2);
             padding: 8px 16px;
-            background: rgba(16, 185, 129, 0.1);
+            background: rgba(47, 179, 80, 0.1);
             color: var(--success-color);
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: var(--radius-full);
+            font-size: 12.5px;
+            font-weight: 600;
+            border: 1px solid rgba(47, 179, 80, 0.2);
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         .ai-status::before {
-            content: '●';
-            font-size: 8px;
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: currentColor;
             animation: pulse 2s infinite;
         }
 
         .ai-status.offline {
-            background: rgba(239, 68, 68, 0.1);
+            background: rgba(255, 69, 58, 0.1);
             color: var(--error-color);
-            border-color: rgba(239, 68, 68, 0.2);
+            border-color: rgba(255, 69, 58, 0.2);
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            50% { opacity: 0.4; }
         }
 
         .editor-container {
@@ -289,11 +495,13 @@
         }
 
         .editor-header {
-            padding: 20px 24px;
+            padding: var(--space-5) var(--space-6);
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: var(--space-4);
+            flex-wrap: wrap;
         }
 
         .note-title-input {
@@ -303,290 +511,422 @@
             border: none;
             color: var(--text-primary);
             flex: 1;
+            min-width: 160px;
             outline: none;
         }
 
-        .note-title-input::placeholder {
-            color: var(--text-muted);
-        }
+        .note-title-input::placeholder { color: var(--text-muted); }
 
         .editor-actions {
             display: flex;
-            gap: 8px;
+            gap: var(--space-2);
         }
 
         .action-btn {
-            padding: 8px 16px;
+            padding: 9px 16px;
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: var(--radius-full);
             background: var(--secondary-bg);
             color: var(--text-secondary);
             font-size: 13px;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: background var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
             display: flex;
             align-items: center;
             gap: 6px;
+            min-height: 40px;
         }
+
+        .action-btn svg { width: 15px; height: 15px; }
 
         .action-btn:hover {
             background: var(--hover-bg);
             border-color: var(--accent-color);
+            color: var(--text-primary);
         }
 
+        .action-btn:active { transform: scale(0.96); }
+
         .action-btn.ai-btn {
-            background: var(--accent-color);
+            background: var(--accent-gradient);
             color: white;
-            border-color: var(--accent-color);
+            border-color: transparent;
+            box-shadow: 0 4px 16px rgba(109, 93, 252, 0.3);
         }
 
         .action-btn.ai-btn:hover {
-            background: var(--accent-hover);
+            filter: brightness(1.08);
+            color: white;
+            box-shadow: 0 6px 20px rgba(109, 93, 252, 0.4);
         }
 
         .editor-content {
             flex: 1;
-            padding: 24px;
+            padding: var(--space-6);
             display: flex;
             flex-direction: column;
-            gap: 16px;
             overflow: hidden;
         }
+
+        .editor-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            overflow: hidden;
+        }
+
+        .editor-area.hidden { display: none; }
 
         .note-editor {
             flex: 1;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            background: var(--secondary-bg);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            background: var(--tertiary-bg);
             color: var(--text-primary);
             font-size: 15px;
-            line-height: 1.6;
+            line-height: 1.7;
             font-family: inherit;
             resize: none;
             outline: none;
-            transition: all 0.2s ease;
+            transition: border-color var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease);
         }
 
         .note-editor:focus {
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 4px rgba(109, 93, 252, 0.12);
+            background: var(--secondary-bg);
         }
 
-        .note-editor::placeholder {
-            color: var(--text-muted);
-        }
+        .note-editor::placeholder { color: var(--text-muted); }
 
         .ai-panel {
-            background: rgba(99, 102, 241, 0.05);
-            border: 1px solid var(--accent-color);
-            border-radius: 8px;
-            padding: 16px;
+            background: var(--tertiary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
             display: none;
         }
 
         .ai-panel.show {
             display: block;
-            animation: slideDown 0.3s ease;
+            animation: slideDown var(--duration-base) var(--ease-out);
         }
 
         @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
+            from { opacity: 0; transform: translateY(-8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* AI suggestions — bento grid of action tiles */
         .ai-suggestions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 12px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-auto-rows: 1fr;
+            gap: var(--space-2);
+            margin-bottom: var(--space-3);
         }
 
         .suggestion-chip {
-            padding: 6px 12px;
+            grid-column: span 2;
+            padding: var(--space-3);
             background: var(--secondary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            font-size: 12px;
+            border-radius: var(--radius-md);
+            font-size: 12.5px;
+            font-weight: 500;
             color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: transform var(--duration-fast) var(--ease), background var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease), border-color var(--duration-fast) var(--ease);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: var(--space-2);
         }
 
+        .suggestion-chip:nth-child(1) { grid-column: span 3; }
+        .suggestion-chip:nth-child(2) { grid-column: span 3; }
+        .suggestion-chip:nth-child(3) { grid-column: span 2; }
+        .suggestion-chip:nth-child(4) { grid-column: span 2; }
+        .suggestion-chip:nth-child(5) { grid-column: span 2; }
+
+        .suggestion-chip svg { width: 16px; height: 16px; }
+
         .suggestion-chip:hover {
-            background: var(--accent-color);
+            background: var(--accent-gradient);
             color: white;
-            border-color: var(--accent-color);
+            border-color: transparent;
+            transform: translateY(-2px);
         }
 
         .ai-response {
             background: var(--secondary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 12px;
-            font-size: 13px;
-            line-height: 1.5;
+            border-radius: var(--radius-md);
+            padding: var(--space-4);
+            font-size: 13.5px;
+            line-height: 1.6;
             color: var(--text-primary);
             white-space: pre-wrap;
+            max-height: 220px;
+            overflow-y: auto;
         }
 
         .empty-state {
-            display: flex;
+            display: none;
+            flex: 1;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100%;
             text-align: center;
+            gap: var(--space-3);
+            color: var(--text-muted);
         }
 
+        .empty-state.show { display: flex; }
+
+        .empty-state-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-lg);
+            background: var(--tertiary-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            margin-bottom: var(--space-2);
+        }
+
+        .empty-state-icon svg { width: 26px; height: 26px; }
+
         .empty-state h3 {
-            font-size: 20px;
+            font-size: 18px;
+            font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 8px;
         }
 
         .empty-state p {
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 13.5px;
+            max-width: 280px;
+        }
+
+        .toast-container {
+            position: fixed;
+            bottom: var(--space-6);
+            right: var(--space-6);
+            display: flex;
+            flex-direction: column-reverse;
+            gap: var(--space-2);
+            z-index: 3000;
+            pointer-events: none;
+            max-width: min(360px, calc(100vw - 2 * var(--space-6)));
         }
 
         .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 12px 16px;
+            padding: 13px 18px;
             background: var(--secondary-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: var(--radius-md);
             color: var(--text-primary);
             box-shadow: var(--shadow-lg);
-            transform: translateX(400px);
-            transition: all 0.3s ease;
-            z-index: 1000;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity var(--duration-base) var(--ease-spring), transform var(--duration-base) var(--ease-spring);
             font-size: 14px;
+            font-weight: 500;
         }
 
-        .toast.show {
-            transform: translateX(0);
-        }
+        .toast.show { opacity: 1; transform: translateY(0); }
 
         .toast.success {
-            border-color: var(--success-color);
-            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(47, 179, 80, 0.3);
+            background: rgba(47, 179, 80, 0.1);
             color: var(--success-color);
         }
 
         .toast.error {
-            border-color: var(--error-color);
-            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(255, 69, 58, 0.3);
+            background: rgba(255, 69, 58, 0.1);
             color: var(--error-color);
         }
 
         /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb {
             background: var(--border-color);
             border-radius: 3px;
         }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-muted);
-        }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
         /* Responsive */
+        @media (max-width: 1024px) {
+            .app-container { grid-template-columns: 300px 1fr; }
+            .ai-suggestions { grid-template-columns: repeat(2, 1fr); }
+            .suggestion-chip,
+            .suggestion-chip:nth-child(1),
+            .suggestion-chip:nth-child(2),
+            .suggestion-chip:nth-child(3),
+            .suggestion-chip:nth-child(4),
+            .suggestion-chip:nth-child(5) { grid-column: span 1; }
+        }
+
         @media (max-width: 768px) {
             .app-container {
                 grid-template-columns: 1fr;
+                padding: var(--space-3);
             }
-            
+
+            .mobile-menu-btn { display: flex; }
+            .sidebar-overlay { display: block; }
+
             .sidebar {
-                display: none;
+                position: fixed;
+                top: var(--space-3);
+                left: var(--space-3);
+                bottom: var(--space-3);
+                width: min(320px, 82vw);
+                z-index: 2000;
+                transform: translateX(calc(-100% - var(--space-6)));
+                transition: transform var(--duration-base) var(--ease-spring);
             }
+
+            .sidebar.open { transform: translateX(0); }
+
+            .header { padding: var(--space-5); padding-left: 64px; }
+            .editor-header { padding: var(--space-4); }
+            .editor-content { padding: var(--space-4); }
+        }
+
+        @media (max-width: 480px) {
+            .notes-list { grid-template-columns: 1fr; }
+            .notes-list .note-item:first-child { grid-column: 1; }
+            .editor-actions .action-btn span { display: none; }
+            .editor-actions .action-btn { padding: 9px; }
         }
     </style>
 </head>
 <body data-theme="light">
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle notes list">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <div class="app-container">
-        <div class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="logo">
-                    🤖 AI Notes
+                    <span class="logo-mark">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.4 3.6 1.2 5.8 2.6 7.2C16 10.6 18.2 11.4 22 12c-3.8.6-6 1.4-7.4 2.8C13.2 16.2 12.4 18.4 12 22c-.4-3.6-1.2-5.8-2.6-7.2C8 13.4 5.8 12.6 2 12c3.8-.6 6-1.4 7.4-2.8C10.8 7.8 11.6 5.6 12 2z"/></svg>
+                    </span>
+                    <span class="logo-text">AI Notes</span>
                 </div>
-                <button class="theme-toggle" id="themeToggle" title="Toggle theme"></button>
+                <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+                    <span class="toggle-thumb">
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></svg>
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.6 15.6A9 9 0 1 1 8.4 3.4a7 7 0 0 0 12.2 12.2z"/></svg>
+                    </span>
+                </button>
             </div>
-            
+
             <div class="search-container">
-                <div class="search-icon">🔍</div>
+                <span class="search-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </span>
                 <input type="text" class="search-input" placeholder="Search notes..." id="searchInput">
             </div>
-            
+
             <button class="new-note-btn" id="newNoteBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 New Note
             </button>
-            
-            <div class="notes-list" id="notesList">
-                <div class="note-item active">
-                    <div class="note-title">Ferrari</div>
-                    <div class="note-preview">Ferrari, the iconic Italian sports car...</div>
-                    <div class="note-date">Today</div>
+
+            <div class="sidebar-stats">
+                <div class="stat-tile">
+                    <div class="stat-value" id="statsCount">0</div>
+                    <div class="stat-label">Notes</div>
                 </div>
-                
-                <div class="note-item">
-                    <div class="note-title">Quantum Computing</div>
-                    <div class="note-preview">A quantum computer is a type of...</div>
-                    <div class="note-date">Yesterday</div>
-                </div>
-                
-                <div class="note-item">
-                    <div class="note-title">Project Ideas</div>
-                    <div class="note-preview">Brainstorming session for the new...</div>
-                    <div class="note-date">2 days ago</div>
+                <div class="stat-tile">
+                    <div class="stat-value" id="statsToday">Today</div>
+                    <div class="stat-label">Last saved</div>
                 </div>
             </div>
-        </div>
-        
-        <div class="main-content">
+
+            <div class="notes-list" id="notesList"></div>
+        </aside>
+
+        <main class="main-content">
             <div class="header">
                 <div class="header-title">FERRARI</div>
-                <div class="ai-status" id="aiStatus">
-                    DeepSeek R1 Ready
-                </div>
+                <div class="ai-status" id="aiStatus">DeepSeek R1 Ready</div>
             </div>
-            
+
             <div class="editor-container">
-                <div class="editor-header">
+                <div class="editor-header" id="editorHeader">
                     <input type="text" class="note-title-input" placeholder="Untitled Note" id="noteTitleInput" value="FERRARI">
                     <div class="editor-actions">
-                        <button class="action-btn" id="saveBtn">💾 Save</button>
-                        <button class="action-btn" id="deleteBtn">🗑️ Delete</button>
-                        <button class="action-btn ai-btn" id="aiBtn">✨ AI Assistant</button>
+                        <button class="action-btn" id="saveBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></svg>
+                            <span>Save</span>
+                        </button>
+                        <button class="action-btn" id="deleteBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                            <span>Delete</span>
+                        </button>
+                        <button class="action-btn ai-btn" id="aiBtn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.4 3.6 1.2 5.8 2.6 7.2C16 10.6 18.2 11.4 22 12c-3.8.6-6 1.4-7.4 2.8C13.2 16.2 12.4 18.4 12 22c-.4-3.6-1.2-5.8-2.6-7.2C8 13.4 5.8 12.6 2 12c3.8-.6 6-1.4 7.4-2.8C10.8 7.8 11.6 5.6 12 2z"/></svg>
+                            <span id="aiBtnLabel">AI Assistant</span>
+                        </button>
                     </div>
                 </div>
-                
+
                 <div class="editor-content">
-                    <textarea class="note-editor" placeholder="Start writing your note..." id="noteEditor">Ferrari, the iconic Italian sports car manufacturer, is synonymous with luxury, speed, and racing heritage. Founded by Enzo Ferrari in 1939, the company initially focused on racing before expanding into the production of high-performance road cars. Ferrari's history is deeply intertwined with Formula 1, where Scuderia Ferrari is the most successful team, boasting numerous championships and a passionate fanbase. Beyond racing, Ferrari cars are known for their distinctive design, advanced technology, and the emotional connection they evoke. Each Ferrari represents a blend of artistry and engineering, making them coveted symbols of automotive excellence and a source of enduring fascination.</textarea>
-                    
-                    <div class="ai-panel" id="aiPanel">
-                        <div class="ai-suggestions">
-                            <div class="suggestion-chip" data-action="summarize">📄 Summarize</div>
-                            <div class="suggestion-chip" data-action="improve">✨ Improve Writing</div>
-                            <div class="suggestion-chip" data-action="expand">📝 Expand Ideas</div>
-                            <div class="suggestion-chip" data-action="questions">❓ Generate Questions</div>
-                            <div class="suggestion-chip" data-action="keywords">🏷️ Extract Keywords</div>
+                    <div class="editor-area" id="editorArea">
+                        <textarea class="note-editor" placeholder="Start writing your note..." id="noteEditor">Ferrari, the iconic Italian sports car manufacturer, is synonymous with luxury, speed, and racing heritage. Founded by Enzo Ferrari in 1939, the company initially focused on racing before expanding into the production of high-performance road cars. Ferrari's history is deeply intertwined with Formula 1, where Scuderia Ferrari is the most successful team, boasting numerous championships and a passionate fanbase. Beyond racing, Ferrari cars are known for their distinctive design, advanced technology, and the emotional connection they evoke. Each Ferrari represents a blend of artistry and engineering, making them coveted symbols of automotive excellence and a source of enduring fascination.</textarea>
+
+                        <div class="ai-panel" id="aiPanel">
+                            <div class="ai-suggestions">
+                                <div class="suggestion-chip" data-action="summarize">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+                                    Summarize
+                                </div>
+                                <div class="suggestion-chip" data-action="improve">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.4 3.6 1.2 5.8 2.6 7.2C16 10.6 18.2 11.4 22 12c-3.8.6-6 1.4-7.4 2.8C13.2 16.2 12.4 18.4 12 22c-.4-3.6-1.2-5.8-2.6-7.2C8 13.4 5.8 12.6 2 12c3.8-.6 6-1.4 7.4-2.8C10.8 7.8 11.6 5.6 12 2z"/></svg>
+                                    Improve Writing
+                                </div>
+                                <div class="suggestion-chip" data-action="expand">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                                    Expand Ideas
+                                </div>
+                                <div class="suggestion-chip" data-action="questions">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2-3 4"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg>
+                                    Questions
+                                </div>
+                                <div class="suggestion-chip" data-action="keywords">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 12.5 12.5 20.5a2 2 0 0 1-2.83 0l-6.17-6.17a2 2 0 0 1 0-2.83L11.5 3.5H19a1.5 1.5 0 0 1 1.5 1.5z"/><circle cx="15" cy="8" r="1.2"/></svg>
+                                    Keywords
+                                </div>
+                            </div>
+                            <div class="ai-response" id="aiResponse"></div>
                         </div>
-                        <div class="ai-response" id="aiResponse"></div>
+                    </div>
+
+                    <div class="empty-state" id="emptyState">
+                        <div class="empty-state-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="12" y2="16"/></svg>
+                        </div>
+                        <h3>No note selected</h3>
+                        <p>Create a new note or pick one from the list to start writing.</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
+
+    <div class="toast-container" id="toastContainer"></div>
 
     <script>
         class AINotesApp {
@@ -624,6 +964,11 @@
                 this.saveTheme();
             }
 
+            closeMobileSidebar() {
+                document.getElementById('sidebar').classList.remove('open');
+                document.getElementById('sidebarOverlay').classList.remove('show');
+            }
+
             loadDefaultNote() {
                 if (this.notes.length === 0) {
                     const defaultNote = {
@@ -633,14 +978,14 @@
                         createdAt: new Date().toISOString(),
                         updatedAt: new Date().toISOString()
                     };
-                    
+
                     this.notes = [defaultNote];
                     this.currentNote = defaultNote;
                     this.saveNotes();
                 } else {
                     this.currentNote = this.notes[0];
                 }
-                
+
                 this.renderNotesList();
             }
 
@@ -671,7 +1016,7 @@
 
                 document.querySelectorAll('.suggestion-chip').forEach(chip => {
                     chip.addEventListener('click', (e) => {
-                        const action = e.target.dataset.action;
+                        const action = e.currentTarget.dataset.action;
                         this.processAIRequest(action);
                     });
                 });
@@ -682,6 +1027,15 @@
 
                 document.getElementById('noteTitleInput').addEventListener('input', () => {
                     this.autoSave();
+                });
+
+                document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                    document.getElementById('sidebar').classList.toggle('open');
+                    document.getElementById('sidebarOverlay').classList.toggle('show');
+                });
+
+                document.getElementById('sidebarOverlay').addEventListener('click', () => {
+                    this.closeMobileSidebar();
                 });
 
                 // Keyboard shortcuts
@@ -737,6 +1091,7 @@
                 this.currentNote = newNote;
                 this.renderNotesList();
                 this.loadNoteInEditor(newNote);
+                this.closeMobileSidebar();
             }
 
             selectNote(noteId) {
@@ -745,10 +1100,14 @@
                     this.currentNote = note;
                     this.loadNoteInEditor(note);
                     this.updateActiveNote(noteId);
+                    this.closeMobileSidebar();
                 }
             }
 
             loadNoteInEditor(note) {
+                document.getElementById('editorHeader').classList.remove('hidden');
+                document.getElementById('editorArea').classList.remove('hidden');
+                document.getElementById('emptyState').classList.remove('show');
                 document.getElementById('noteTitleInput').value = note.title;
                 document.getElementById('noteEditor').value = note.content;
                 document.querySelector('.header-title').textContent = note.title.toUpperCase();
@@ -766,7 +1125,7 @@
                 this.currentNote.updatedAt = new Date().toISOString();
 
                 document.querySelector('.header-title').textContent = title.toUpperCase();
-                
+
                 this.saveNotes();
                 this.renderNotesList();
                 this.updateActiveNote(this.currentNote.id);
@@ -790,21 +1149,24 @@
                     this.currentNote = this.notes.length > 0 ? this.notes[0] : null;
                     this.saveNotes();
                     this.renderNotesList();
-                    
+
                     if (this.currentNote) {
                         this.loadNoteInEditor(this.currentNote);
                     } else {
                         document.getElementById('noteTitleInput').value = '';
                         document.getElementById('noteEditor').value = '';
                         document.querySelector('.header-title').textContent = 'AI NOTES';
+                        document.getElementById('editorHeader').classList.add('hidden');
+                        document.getElementById('editorArea').classList.add('hidden');
+                        document.getElementById('emptyState').classList.add('show');
                     }
-                    
+
                     this.showToast('Note deleted', 'success');
                 }
             }
 
             searchNotes(query) {
-                const filteredNotes = this.notes.filter(note => 
+                const filteredNotes = this.notes.filter(note =>
                     note.title.toLowerCase().includes(query.toLowerCase()) ||
                     note.content.toLowerCase().includes(query.toLowerCase())
                 );
@@ -813,20 +1175,27 @@
 
             renderNotesList(notesToRender = this.notes) {
                 const notesList = document.getElementById('notesList');
-                
+                this.updateStats();
+
                 if (notesToRender.length === 0) {
-                    notesList.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 20px; font-size: 13px;">No notes found</div>';
+                    notesList.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; color: var(--text-secondary); padding: 20px; font-size: 13px;">No notes found</div>';
                     return;
                 }
 
-                notesList.innerHTML = notesToRender.map(note => `
-                    <div class="note-item ${this.currentNote?.id === note.id ? 'active' : ''}" 
+                notesList.innerHTML = notesToRender.map((note, index) => `
+                    <div class="note-item ${this.currentNote?.id === note.id ? 'active' : ''}"
+                         style="animation-delay: ${Math.min(index, 8) * 40}ms"
                          onclick="app.selectNote('${note.id}')">
                         <div class="note-title">${this.escapeHtml(note.title)}</div>
                         <div class="note-preview">${this.escapeHtml(note.content.substring(0, 100))}${note.content.length > 100 ? '...' : ''}</div>
                         <div class="note-date">${this.formatDate(note.updatedAt)}</div>
                     </div>
                 `).join('');
+            }
+
+            updateStats() {
+                const statsCount = document.getElementById('statsCount');
+                if (statsCount) statsCount.textContent = this.notes.length;
             }
 
             updateActiveNote(noteId) {
@@ -842,7 +1211,7 @@
             toggleAIPanel() {
                 const aiPanel = document.getElementById('aiPanel');
                 aiPanel.classList.toggle('show');
-                
+
                 if (aiPanel.classList.contains('show') && !this.isAIConnected) {
                     this.showToast('AI connection not available. Please ensure Ollama is running.', 'error');
                 }
@@ -857,10 +1226,10 @@
                     const response = await fetch('http://localhost:11434/api/tags');
                     if (response.ok) {
                         const data = await response.json();
-                        const hasDeepSeek = data.models?.some(model => 
+                        const hasDeepSeek = data.models?.some(model =>
                             model.name.includes('deepseek-r1:1.5b')
                         );
-                        
+
                         this.isAIConnected = hasDeepSeek;
                         this.updateAIStatus(hasDeepSeek);
                     }
@@ -892,25 +1261,23 @@
                     return;
                 }
 
-                const aiBtn = document.getElementById('aiBtn');
+                const aiBtnLabel = document.getElementById('aiBtnLabel');
                 const aiResponse = document.getElementById('aiResponse');
-                
-                aiBtn.classList.add('loading');
-                aiBtn.textContent = '⏳ Processing...';
+
+                aiBtnLabel.textContent = 'Processing...';
                 aiResponse.textContent = 'AI is thinking...';
 
                 try {
                     const prompt = this.generatePrompt(action, this.currentNote.content);
                     const response = await this.callOllama(prompt);
-                    
+
                     aiResponse.textContent = response;
                 } catch (error) {
                     console.error('AI request failed:', error);
                     aiResponse.textContent = 'Sorry, I encountered an error while processing your request.';
                     this.showToast('AI request failed', 'error');
                 } finally {
-                    aiBtn.classList.remove('loading');
-                    aiBtn.textContent = '✨ AI Assistant';
+                    aiBtnLabel.textContent = 'AI Assistant';
                 }
             }
 
@@ -922,7 +1289,7 @@
                     questions: `Based on this text, generate 5 thoughtful questions that could help explore the topic deeper:\n\n${content}`,
                     keywords: `Extract the main keywords and key concepts from this text:\n\n${content}`
                 };
-                
+
                 return prompts[action] || content;
             }
 
@@ -951,12 +1318,12 @@
                 const toast = document.createElement('div');
                 toast.className = `toast ${type}`;
                 toast.textContent = message;
-                document.body.appendChild(toast);
+                document.getElementById('toastContainer').appendChild(toast);
 
-                setTimeout(() => toast.classList.add('show'), 100);
+                setTimeout(() => toast.classList.add('show'), 20);
                 setTimeout(() => {
                     toast.classList.remove('show');
-                    setTimeout(() => document.body.removeChild(toast), 300);
+                    setTimeout(() => toast.remove(), 300);
                 }, 3000);
             }
 
@@ -966,10 +1333,10 @@
                 const diffTime = Math.abs(now - date);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-                if (diffDays === 1) return 'Today';
+                if (diffDays <= 1) return 'Today';
                 if (diffDays === 2) return 'Yesterday';
                 if (diffDays <= 7) return `${diffDays} days ago`;
-                
+
                 return date.toLocaleDateString();
             }
 
