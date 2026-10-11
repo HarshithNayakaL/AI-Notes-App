@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>AI Notes</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Crect width='10' height='10' fill='%23377ef0'/%3E%3Crect x='10' width='10' height='10' fill='%23fed933'/%3E%3Crect x='20' width='10' height='10' fill='%23ffa7f0'/%3E%3Crect y='10' width='10' height='10' fill='%23fe6d2e'/%3E%3Crect x='10' y='10' width='10' height='10' fill='%2300ad6f'/%3E%3Crect x='20' y='10' width='10' height='10' fill='%239084f4'/%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23F59BC0'/%3E%3Cstop offset='.5' stop-color='%23B79CF7'/%3E%3Cstop offset='1' stop-color='%23F7B267'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='url(%23g)'/%3E%3Crect x='19' y='14' width='26' height='36' rx='6' fill='none' stroke='white' stroke-width='4'/%3E%3Cpath d='M26 26h12M26 34h8' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Schibsted+Grotesk:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,30 +16,64 @@
         }
 
         :root {
-            --font-display: 'Gloock', Georgia, 'Times New Roman', serif;
-            --font-ui: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-            --paper: #ffffff;
-            --ink: #000000;
-            --ink-2: #666565;
-            --ink-3: #b3b3b3;
+            --bg: #ffffff;
+            --text: #16131f;
+            --text-2: #6b6780;
+            --text-3: #a7a3b8;
+            --line: #eceaf3;
+            --soft: #f5f4f9;
+            --card: #ffffff;
 
-            --blue: #377ef0;
-            --yellow: #fed933;
-            --orange: #fe6d2e;
-            --green: #00ad6f;
-            --pink: #ffa7f0;
-            --lilac: #9084f4;
+            --purple: #b39df5;
+            --purple-deep: #8e6cf0;
+            --yellow: #f5c34b;
+            --pink: #f06ba8;
+            --blue: #3fa2f2;
+            --orange: #f5a524;
+            --green: #2fbf71;
 
-            --hair: 1.5px;
-            --ease: cubic-bezier(.84, 0, .16, 1);
+            --tint-lav: #f2edff;
+            --tint-lav-line: #e4d9ff;
+            --tint-sky: #e9f5ff;
+            --tint-sky-line: #cfe7fb;
+            --tint-cream: #fff6e2;
+            --tint-cream-line: #f6e1b0;
+            --tint-pink: #fff0f6;
+            --tint-pink-line: #fad2e4;
+            --tint-mint: #eafaf2;
+            --tint-mint-line: #c6edd8;
+
+            --nav: #1f1452;
+            --nav-item: #2f2373;
+            --grad: linear-gradient(135deg, #f59bc0 0%, #b79cf7 50%, #f7b267 100%);
+            --shadow: 0 1px 2px rgba(22, 19, 31, 0.04), 0 8px 24px rgba(22, 19, 31, 0.06);
         }
 
         [data-theme="dark"] {
-            --paper: #0e0e0e;
-            --ink: #f2f2f2;
-            --ink-2: #a6a6a6;
-            --ink-3: #5c5c5c;
+            --bg: #0f0c1b;
+            --text: #f3f1fa;
+            --text-2: #a9a4be;
+            --text-3: #6b6680;
+            --line: #262138;
+            --soft: #1a1629;
+            --card: #171326;
+
+            --tint-lav: #1d1833;
+            --tint-lav-line: #2f2753;
+            --tint-sky: #13202e;
+            --tint-sky-line: #1f364f;
+            --tint-cream: #261f12;
+            --tint-cream-line: #42361a;
+            --tint-pink: #28141f;
+            --tint-pink-line: #482236;
+            --tint-mint: #12241b;
+            --tint-mint-line: #1e3d2d;
+
+            --nav: #2a1d6e;
+            --nav-item: #3a2c8a;
+            --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
         }
 
         html {
@@ -47,574 +81,920 @@
         }
 
         body {
-            font-family: var(--font-ui);
+            font-family: var(--font);
             font-size: 15px;
-            line-height: 1.4;
-            letter-spacing: -0.01em;
-            background: var(--paper);
-            color: var(--ink);
-            height: 100vh;
-            height: 100dvh;
-            overflow: hidden;
+            line-height: 1.45;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
             -webkit-font-smoothing: antialiased;
         }
 
         button, input, textarea {
             font: inherit;
             color: inherit;
-            letter-spacing: inherit;
         }
 
         button {
             cursor: pointer;
-        }
-
-        ::selection {
-            background: var(--yellow);
-            color: #000;
+            -webkit-tap-highlight-color: transparent;
         }
 
         :focus-visible {
-            outline: 2px solid var(--ink);
+            outline: 2px solid var(--purple-deep);
             outline-offset: 3px;
         }
 
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: var(--ink-3) transparent;
-        }
-
-        .sq {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border: var(--hair) solid var(--ink);
+        svg.i {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
             flex-shrink: 0;
         }
 
-        body[data-view="index"] .note-view,
-        body[data-view="note"] .index-view {
+        /* ===== Screens ===== */
+        .screen {
+            display: none;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 28px 32px 150px;
+            animation: screenIn 0.3s ease;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes screenIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: none; }
+        }
+
+        /* ===== Top bar ===== */
+        .top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .hello {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--grad);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .top-title {
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1.5px solid var(--line);
+            background: var(--card);
+            color: var(--text);
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            transition: background 0.15s, border-color 0.15s, transform 0.1s;
+        }
+
+        .circle:hover {
+            background: var(--soft);
+        }
+
+        .circle:active {
+            transform: scale(0.94);
+        }
+
+        .circle-dark {
+            background: var(--nav);
+            border-color: var(--nav);
+            color: #fff;
+        }
+
+        .circle-dark:hover {
+            background: var(--nav-item);
+        }
+
+        .circle-danger:hover {
+            color: var(--pink);
+            border-color: var(--tint-pink-line);
+            background: var(--tint-pink);
+        }
+
+        [data-theme="dark"] .icon-sun,
+        [data-theme="light"] .icon-moon {
             display: none;
         }
 
-        /* ===== Shared controls ===== */
-        .pill {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            height: 40px;
-            padding: 0 18px;
-            border: var(--hair) solid var(--ink);
-            border-radius: 999px;
-            background: var(--paper);
-            color: var(--ink);
-            font-size: 12.5px;
+        /* ===== Type ===== */
+        .h1 {
+            font-size: clamp(28px, 3vw, 36px);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.15;
+        }
+
+        .date-line {
+            margin-top: 4px;
+            font-size: 14px;
             font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-            white-space: nowrap;
-            transition: background 0.15s, color 0.15s, transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+            color: var(--text-2);
         }
 
-        .pill:hover {
-            background: var(--ink);
-            color: var(--paper);
+        .section-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
         }
 
-        .pill-danger:hover {
-            background: var(--orange);
-            color: #000;
+        .section-head h2 {
+            font-size: 21px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
-        .pill-new {
-            background: var(--yellow);
-            color: #000;
-            box-shadow: 4px 4px 0 var(--ink);
+        .see-all {
+            border: 0;
+            background: none;
+            color: var(--purple-deep);
+            font-size: 15px;
+            font-weight: 600;
         }
 
-        .pill-new:hover {
-            background: var(--yellow);
-            color: #000;
-            transform: translate(-1px, -1px);
-            box-shadow: 5px 5px 0 var(--ink);
+        .count {
+            margin-top: 2px;
+            font-size: 14px;
+            color: var(--text-2);
         }
 
-        .pill-new:active {
-            transform: translate(4px, 4px);
-            box-shadow: 0 0 0 var(--ink);
+        .label {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 14px;
         }
 
-        .icon-btn {
-            width: 40px;
-            height: 40px;
-            flex-shrink: 0;
+        /* ===== Home ===== */
+        .home-grid {
             display: grid;
-            place-items: center;
-            border: var(--hair) solid var(--ink);
-            border-radius: 50%;
-            background: var(--paper);
-            color: var(--ink);
-            transition: background 0.15s;
+            grid-template-columns: 440px minmax(0, 1fr);
+            gap: 48px;
+            align-items: start;
         }
 
-        .icon-btn:hover {
-            background: var(--yellow);
-            color: #000;
+        .hero-cards {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 12px;
+            margin-top: 26px;
         }
 
-        .theme-icon {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            border: var(--hair) solid currentColor;
-            background: linear-gradient(90deg, currentColor 50%, transparent 50%);
-        }
-
-        /* ===== Index view ===== */
-        .index-view {
+        .hero {
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            height: 100%;
-            overflow-y: auto;
+            align-items: flex-start;
+            justify-content: flex-end;
+            height: 168px;
+            padding: 18px;
+            border: 0;
+            border-radius: 26px;
+            color: #fff;
+            text-align: left;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .hero:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(31, 20, 82, 0.16);
+        }
+
+        .hero:active {
+            transform: scale(0.98);
+        }
+
+        .hero-purple {
+            background: var(--purple);
+        }
+
+        .hero-yellow {
+            background: var(--yellow);
+        }
+
+        .hero-plus {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.28);
+            display: grid;
+            place-items: center;
+        }
+
+        .hero-small {
+            position: relative;
+            font-size: 15px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .hero-big {
+            position: relative;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .hero-deco {
+            position: absolute;
+            right: -6px;
+            bottom: -4px;
+            width: 104px;
+            height: 104px;
+            opacity: 0.32;
+            pointer-events: none;
+        }
+
+        .status-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 18px;
+            padding: 18px 20px;
+            border-radius: 22px;
+            background: var(--soft);
+        }
+
+        .status-card strong {
+            display: block;
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .status-card span.sub {
+            font-size: 14px;
+            color: var(--text-2);
+        }
+
+        .status-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+            flex-shrink: 0;
         }
 
         .bar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 20px 32px;
+            width: 110px;
+            height: 14px;
+            border-radius: 8px;
+            background: var(--card);
+            overflow: hidden;
         }
 
-        .bar .spacer {
-            flex: 1;
+        .bar i {
+            display: block;
+            height: 100%;
+            width: 45%;
+            border-radius: 8px;
+            background:
+                repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.3) 0 5px, transparent 5px 10px),
+                linear-gradient(90deg, #b79cf7, #f7b267);
+            transition: width 0.6s ease;
+            animation: pulse 1.4s ease-in-out infinite;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-family: var(--font-display);
-            font-size: 26px;
-            line-height: 1;
-            letter-spacing: -0.01em;
-            white-space: nowrap;
+        .status-card.ready .bar i {
+            width: 100%;
+            animation: none;
         }
 
-        .logo-grid {
+        .status-card.offline .bar i {
+            width: 100%;
+            animation: none;
+            background:
+                repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.5) 0 5px, transparent 5px 10px),
+                linear-gradient(90deg, #d9d5e5, #e6e2ef);
+        }
+
+        [data-theme="dark"] .status-card.offline .bar i {
+            background:
+                repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.06) 0 5px, transparent 5px 10px),
+                linear-gradient(90deg, #2c2640, #342d4a);
+        }
+
+        @keyframes pulse {
+            50% { opacity: 0.55; }
+        }
+
+        .status-text {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .home-side .note-list {
+            margin-top: 16px;
+        }
+
+        /* ===== Browse ===== */
+        .browse {
             display: grid;
-            grid-template-columns: repeat(3, 13px);
-            grid-template-rows: repeat(2, 13px);
-            gap: var(--hair);
-            background: var(--ink);
-            border: var(--hair) solid var(--ink);
+            grid-template-columns: repeat(4, minmax(0, 104px));
+            gap: 14px;
+            margin-bottom: 34px;
         }
 
-        .logo-grid i:nth-child(1) { background: var(--blue); }
-        .logo-grid i:nth-child(2) { background: var(--yellow); }
-        .logo-grid i:nth-child(3) { background: var(--pink); }
-        .logo-grid i:nth-child(4) { background: var(--orange); }
-        .logo-grid i:nth-child(5) { background: var(--green); }
-        .logo-grid i:nth-child(6) { background: var(--lilac); }
-
-        .search-wrap {
+        .browse-btn {
             display: flex;
-            justify-content: center;
-            padding: 12px 32px 0;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            border: 0;
+            background: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-2);
         }
 
-        .search {
-            width: min(420px, 100%);
-            height: 42px;
-            padding: 0 20px;
-            border: var(--hair) solid var(--ink);
-            border-radius: 999px;
-            background: var(--paper);
+        .browse-tile {
+            width: 72px;
+            height: 72px;
+            border-radius: 22px;
+            display: grid;
+            place-items: center;
+            border: 2px solid transparent;
+            transition: border-color 0.15s, transform 0.1s;
+        }
+
+        .browse-tile svg.i {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+            fill-opacity: 0.22;
+        }
+
+        .browse-btn:active .browse-tile {
+            transform: scale(0.95);
+        }
+
+        .browse-btn.active {
+            color: var(--text);
+            font-weight: 700;
+        }
+
+        .browse-btn.active .browse-tile {
+            border-color: currentColor;
+        }
+
+        .b-all .browse-tile { background: var(--tint-lav); color: var(--purple-deep); }
+        .b-today .browse-tile { background: var(--tint-cream); color: var(--orange); }
+        .b-week .browse-tile { background: var(--tint-sky); color: var(--blue); }
+        .b-older .browse-tile { background: var(--tint-pink); color: var(--pink); }
+
+        .search-row {
+            display: none;
+            margin: 18px 0 4px;
+        }
+
+        .search-row.show {
+            display: block;
+        }
+
+        .search-field {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 52px;
+            padding: 0 18px;
+            border-radius: 18px;
+            background: var(--soft);
+            color: var(--text-2);
+        }
+
+        .search-field input {
+            flex: 1;
+            min-width: 0;
+            border: 0;
+            outline: none;
+            background: transparent;
+            color: var(--text);
+            font-size: 15px;
+        }
+
+        .search-field input::placeholder {
+            color: var(--text-3);
+        }
+
+        .search-field:focus-within {
+            box-shadow: 0 0 0 2px var(--purple);
+        }
+
+        /* ===== Note cards ===== */
+        .note-list {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .notes-grid {
+            grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+        }
+
+        .note-card {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            text-align: left;
+            padding: 18px 18px 16px;
+            border-radius: 24px;
+            background: var(--t);
+            border: 1.5px solid var(--tl);
+            color: var(--text);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            animation: screenIn 0.35s ease both;
+        }
+
+        .note-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .note-card:active {
+            transform: scale(0.99);
+        }
+
+        .t-lav { --t: var(--tint-lav); --tl: var(--tint-lav-line); --ac: #a88bf4; --ac2: #f06ba8; }
+        .t-sky { --t: var(--tint-sky); --tl: var(--tint-sky-line); --ac: #3fa2f2; --ac2: #f06ba8; }
+        .t-cream { --t: var(--tint-cream); --tl: var(--tint-cream-line); --ac: #e9a93a; --ac2: #a88bf4; }
+        .t-pink { --t: var(--tint-pink); --tl: var(--tint-pink-line); --ac: #f06ba8; --ac2: #a88bf4; }
+        .t-mint { --t: var(--tint-mint); --tl: var(--tint-mint-line); --ac: #2fbf71; --ac2: #f06ba8; }
+
+        .note-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .note-card p {
+            margin-top: 6px;
+            font-size: 14px;
+            color: var(--text-2);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 16px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            height: 26px;
+            padding: 0 10px;
+            border-radius: 8px;
+            font-size: 11.5px;
+            font-weight: 600;
+            color: #fff;
+            background: var(--ac, var(--purple-deep));
+        }
+
+        .tag svg.i {
+            width: 13px;
+            height: 13px;
+            stroke-width: 2.4;
+        }
+
+        .tag-2 {
+            background: var(--ac2, var(--pink));
+        }
+
+        .empty {
+            padding: 28px 22px;
+            border-radius: 24px;
+            border: 1.5px dashed var(--line);
+            color: var(--text-2);
             font-size: 15px;
             text-align: center;
         }
 
-        .search::placeholder {
-            color: var(--ink-3);
-        }
-
-        .search:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px var(--yellow);
-        }
-
-        .index-list {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 6px;
-            padding: 48px 32px 56px;
-        }
-
-        .row {
-            display: grid;
-            grid-template-columns: 1fr minmax(0, auto) 1fr;
-            align-items: center;
-            gap: 0 22px;
-            width: 100%;
-            padding: 0;
-            border: 0;
-            background: none;
-            color: var(--ink);
-            text-align: center;
-            animation: rowIn 0.6s var(--ease) both;
-        }
-
-        .row:focus-visible {
-            outline: none;
-        }
-
-        .row-title {
-            grid-column: 2;
-            grid-row: 1;
-            max-width: 1200px;
-            padding: 0.03em 0.14em 0.05em;
-            font-size: clamp(38px, 6vw, 96px);
-            font-weight: 800;
-            line-height: 0.92;
-            letter-spacing: -0.035em;
-            text-transform: uppercase;
-            overflow-wrap: anywhere;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .row:hover .row-title,
-        .row:focus-visible .row-title {
-            background: var(--c);
-            color: #000;
-        }
-
-        .row-note {
-            grid-row: 1;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--font-display);
+        .empty strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--text);
             font-size: 16px;
-            letter-spacing: 0;
-            white-space: nowrap;
         }
 
-        .row:nth-child(odd) .row-note {
-            grid-column: 1;
-            justify-self: end;
+        .fab {
+            position: fixed;
+            right: max(24px, calc((100vw - 1180px) / 2 + 32px));
+            bottom: 112px;
+            z-index: 25;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 0;
+            background: linear-gradient(135deg, #c9b5ff, #a98cf5);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            box-shadow: 0 10px 24px rgba(142, 108, 240, 0.4);
+            transition: transform 0.15s;
         }
 
-        .row:nth-child(even) .row-note {
-            grid-column: 3;
-            justify-self: start;
+        .fab:hover {
+            transform: translateY(-2px);
         }
 
-        .row-note .sq {
-            background: var(--c);
+        .fab svg.i {
+            width: 24px;
+            height: 24px;
         }
 
-        @keyframes rowIn {
-            from { opacity: 0; transform: translateY(14px); }
-            to { opacity: 1; transform: none; }
+        /* ===== Editor ===== */
+        .editor-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 360px;
+            gap: 36px;
+            align-items: start;
         }
 
-        .index-empty {
-            text-align: center;
-            font-size: clamp(38px, 6vw, 96px);
-            font-weight: 800;
-            line-height: 0.92;
-            letter-spacing: -0.035em;
-            text-transform: uppercase;
-            color: var(--ink-3);
-        }
-
-        .index-foot {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            padding: 18px 32px 22px;
-            font-size: 12px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-        }
-
-        .index-foot span {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .index-foot .sq {
-            background: var(--green);
-        }
-
-        /* ===== Note view ===== */
-        .note-view {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            animation: viewIn 0.5s var(--ease);
-        }
-
-        @keyframes viewIn {
-            from { opacity: 0; transform: translateY(18px); }
-            to { opacity: 1; transform: none; }
-        }
-
-        .note-bar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 32px;
-            border-bottom: var(--hair) solid var(--ink);
-        }
-
-        .note-bar .spacer {
-            flex: 1;
-        }
-
-        .note-scroll {
-            flex: 1;
-            min-height: 0;
-            overflow-y: auto;
-            padding: 56px 32px 280px;
-        }
-
-        .note-col {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .note-meta {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 12px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-            color: var(--ink-2);
-        }
-
-        .note-meta .sq {
-            background: var(--c);
-        }
-
-        .doc-title {
+        .editor-title {
             display: block;
             width: 100%;
-            margin: 14px 0 22px;
-            padding: 0;
+            margin: 14px 0 18px;
             border: 0;
             outline: none;
             background: transparent;
-            font-family: var(--font-display);
-            font-size: clamp(40px, 6vw, 76px);
-            line-height: 1.02;
-            letter-spacing: -0.02em;
+            font-size: clamp(28px, 3vw, 36px);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.15;
         }
 
-        .doc-title::placeholder,
-        .note-editor::placeholder {
-            color: var(--ink-3);
+        .editor-title::placeholder,
+        .editor-text::placeholder {
+            color: var(--text-3);
         }
 
-        .doc-bar {
-            height: 12px;
-            margin-bottom: 34px;
-            background: var(--c);
-            border: var(--hair) solid var(--ink);
+        .editor-card {
+            padding: 22px 24px;
+            border-radius: 26px;
+            background: var(--t);
+            border: 1.5px solid var(--tl);
         }
 
-        .note-editor {
+        .editor-text {
             display: block;
             width: 100%;
-            min-height: 40vh;
+            min-height: 46vh;
             overflow: hidden;
             border: 0;
             outline: none;
             resize: none;
             background: transparent;
-            font-size: 18px;
-            line-height: 1.7;
-            letter-spacing: -0.005em;
+            font-size: 17px;
+            line-height: 1.75;
         }
 
-        .doc-title:focus-visible,
-        .note-editor:focus-visible {
+        .editor-title:focus-visible,
+        .editor-text:focus-visible {
             outline: none;
         }
 
-        /* ===== AI dock ===== */
-        .dock {
-            position: fixed;
-            left: 50%;
-            bottom: 24px;
-            z-index: 20;
-            width: min(1120px, calc(100% - 48px));
-            transform: translateX(-50%);
-            background: var(--blue);
-            color: #000;
-            border: var(--hair) solid var(--ink);
-            box-shadow: 6px 6px 0 var(--ink);
+        .ai-side {
+            position: sticky;
+            top: 28px;
         }
 
-        .dock-answer {
-            display: none;
-            border-bottom: var(--hair) solid #000;
-            background: #fff;
-        }
-
-        .dock.has-answer .dock-answer {
-            display: block;
-        }
-
-        .dock-answer-head {
+        .ai-head {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 12px 16px 0 20px;
-            font-size: 12px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 14px;
         }
 
-        .dock-clear {
-            height: 30px;
+        .ai-head h2 {
+            font-size: 21px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .ai-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            height: 28px;
             padding: 0 12px;
-            border: var(--hair) solid #000;
             border-radius: 999px;
-            background: #fff;
-            color: #000;
-            font-size: 11.5px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--soft);
+            color: var(--text-2);
         }
 
-        .dock-clear:hover {
-            background: #000;
-            color: #fff;
+        .ai-pill::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--text-3);
         }
 
-        .dock-answer-text {
-            max-height: 36vh;
-            overflow-y: auto;
-            padding: 10px 20px 18px;
+        .ai-pill.ready {
+            background: var(--tint-mint);
+            color: var(--green);
+        }
+
+        .ai-pill.ready::before {
+            background: var(--green);
+        }
+
+        .ai-pill.offline {
+            background: var(--tint-pink);
+            color: var(--pink);
+        }
+
+        .ai-pill.offline::before {
+            background: var(--pink);
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .action {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+            min-height: 104px;
+            padding: 16px;
+            border: 0;
+            border-radius: 22px;
+            background: var(--soft);
+            color: var(--text);
+            text-align: left;
             font-size: 15px;
-            line-height: 1.6;
+            font-weight: 500;
+            transition: transform 0.1s, box-shadow 0.15s;
+        }
+
+        .action:hover {
+            box-shadow: var(--shadow);
+        }
+
+        .action:active {
+            transform: scale(0.97);
+        }
+
+        .action svg.i {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+            fill-opacity: 0.22;
+            color: var(--ic);
+        }
+
+        .action.running {
+            box-shadow: 0 0 0 2px var(--ic);
+        }
+
+        .action:nth-child(1) { --ic: var(--purple-deep); }
+        .action:nth-child(2) { --ic: var(--pink); }
+        .action:nth-child(3) { --ic: var(--blue); }
+        .action:nth-child(4) { --ic: var(--orange); }
+        .action:nth-child(5) { --ic: var(--green); }
+
+        .ai-hint {
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--text-2);
+        }
+
+        .answer {
+            display: none;
+            margin-top: 14px;
+            padding: 16px 18px 18px;
+            border-radius: 22px;
+            background: var(--card);
+            border: 1.5px solid var(--line);
+            box-shadow: var(--shadow);
+        }
+
+        .answer.show {
+            display: block;
+            animation: screenIn 0.3s ease;
+        }
+
+        .answer-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .answer-head .spark {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--grad);
+            color: #fff;
+            display: grid;
+            place-items: center;
+        }
+
+        .answer-head .spark svg.i {
+            width: 15px;
+            height: 15px;
+        }
+
+        .answer-head .x {
+            margin-left: auto;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 0;
+            background: var(--soft);
+            color: var(--text-2);
+            display: grid;
+            place-items: center;
+        }
+
+        .answer-head .x svg.i {
+            width: 16px;
+            height: 16px;
+        }
+
+        .answer-text {
+            max-height: 46vh;
+            overflow-y: auto;
+            font-size: 14.5px;
+            line-height: 1.65;
             white-space: pre-wrap;
         }
 
-        .dock-row {
+        /* ===== Bottom nav ===== */
+        .nav {
+            position: fixed;
+            left: 50%;
+            bottom: max(20px, env(safe-area-inset-bottom));
+            z-index: 30;
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding: 14px 16px 14px 20px;
-        }
-
-        .dock-label {
-            font-family: var(--font-display);
-            font-size: 21px;
-            line-height: 1.1;
-            letter-spacing: -0.01em;
-            white-space: nowrap;
-        }
-
-        .dock-actions {
-            display: flex;
-            flex-wrap: wrap;
             gap: 8px;
-        }
-
-        .chip {
-            height: 34px;
-            padding: 0 14px;
-            border: var(--hair) solid #000;
+            padding: 8px;
             border-radius: 999px;
-            background: transparent;
-            color: #000;
-            font-size: 12px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-            white-space: nowrap;
-            transition: background 0.15s, opacity 0.15s;
+            background: var(--nav);
+            box-shadow: 0 14px 34px rgba(31, 20, 82, 0.35);
+            transform: translateX(-50%);
         }
 
-        .chip:hover {
+        body[data-view="editor"] .nav,
+        body[data-view="editor"] .fab,
+        body[data-view="home"] .fab {
+            display: none;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 52px;
+            min-width: 52px;
+            padding: 0;
+            justify-content: center;
+            border: 0;
+            border-radius: 999px;
+            background: var(--nav-item);
+            color: #e9e4ff;
+            transition: background 0.2s, padding 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #3d3090;
+        }
+
+        .nav-btn .ic {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+        }
+
+        .nav-btn .lbl {
+            display: none;
+            font-size: 13.5px;
+            font-weight: 600;
+            padding-right: 18px;
+        }
+
+        .nav-btn.active {
             background: #fff;
+            color: #16131f;
+            padding-left: 5px;
+            justify-content: flex-start;
         }
 
-        .chip.running {
-            background: var(--yellow);
+        .nav-btn.active .ic {
+            background: var(--grad);
+            color: #fff;
         }
 
-        .chip:focus-visible {
-            outline-color: #000;
-        }
-
-        .dock.offline .chip {
-            opacity: 0.5;
+        .nav-btn.active .lbl {
+            display: inline;
         }
 
         /* ===== Toast ===== */
         .toast {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            left: 50%;
+            bottom: 104px;
             z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            max-width: min(360px, calc(100vw - 40px));
-            padding: 12px 16px 12px 14px;
-            background: var(--paper);
-            color: var(--ink);
-            border: var(--hair) solid var(--ink);
-            box-shadow: 4px 4px 0 var(--ink);
+            max-width: min(380px, calc(100vw - 40px));
+            padding: 12px 18px;
+            border-radius: 16px;
+            background: var(--nav);
+            color: #fff;
             font-size: 14px;
-            transform: translateY(-160%);
-            transition: transform 0.4s var(--ease);
+            font-weight: 500;
+            box-shadow: 0 12px 30px rgba(31, 20, 82, 0.3);
+            opacity: 0;
+            transform: translate(-50%, 10px);
+            transition: opacity 0.25s, transform 0.25s;
+            pointer-events: none;
+        }
+
+        body[data-view="editor"] .toast {
+            bottom: 28px;
         }
 
         .toast.show {
-            transform: none;
+            opacity: 1;
+            transform: translate(-50%, 0);
         }
 
-        .toast .sq {
-            background: var(--green);
-        }
-
-        .toast.error .sq {
-            background: var(--orange);
+        .toast.error {
+            background: #b8336f;
         }
 
         @media (hover: none) {
-            .icon-btn:hover,
-            .pill:not(.pill-new):hover {
-                background: var(--paper);
-                color: var(--ink);
-            }
-
-            .pill-new:hover {
-                transform: none;
-                box-shadow: 4px 4px 0 var(--ink);
-            }
-
-            .row:hover .row-title {
-                background: none;
-                color: var(--ink);
-            }
-
-            .chip:hover {
-                background: transparent;
-            }
+            .circle:hover { background: var(--card); }
+            .circle-dark:hover { background: var(--nav); }
+            .hero:hover, .note-card:hover { transform: none; box-shadow: none; }
+            .action:hover { box-shadow: none; }
+            .nav-btn:hover { background: var(--nav-item); }
+            .nav-btn.active:hover { background: #fff; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -625,164 +1005,288 @@
             }
         }
 
-        /* ===== Small screens ===== */
-        @media (max-width: 720px) {
-            .bar {
-                padding: 14px 16px;
-                gap: 10px;
+        /* ===== Responsive ===== */
+        @media (max-width: 980px) {
+            .home-grid,
+            .editor-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 32px;
             }
 
-            .logo {
-                font-size: 22px;
-                gap: 10px;
+            .ai-side {
+                position: static;
             }
 
-            .logo-grid {
-                grid-template-columns: repeat(3, 10px);
-                grid-template-rows: repeat(2, 10px);
-            }
-
-            .pill {
-                height: 38px;
-                padding: 0 14px;
-            }
-
-            .search-wrap {
-                padding: 8px 16px 0;
-            }
-
-            .index-list {
-                gap: 22px;
-                padding: 36px 16px 40px;
-            }
-
-            .row {
+            .actions {
                 display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 6px;
-            }
-
-            .row-note {
-                order: -1;
-                font-size: 14px;
-            }
-
-            .index-foot {
-                padding: 14px 16px 18px;
-                font-size: 11px;
-            }
-
-            .note-bar {
-                padding: 12px 16px;
-            }
-
-            .back-long {
-                display: none;
-            }
-
-            .note-scroll {
-                padding: 32px 18px 320px;
-            }
-
-            .note-editor {
-                font-size: 17px;
-            }
-
-            .dock {
-                bottom: 12px;
-                width: calc(100% - 28px);
-                box-shadow: 4px 4px 0 var(--ink);
-            }
-
-            .dock-row {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 10px;
-                padding: 12px 0 14px 14px;
-            }
-
-            .dock-label {
-                font-size: 18px;
-                white-space: normal;
-                padding-right: 14px;
-            }
-
-            .dock-actions {
-                flex-wrap: nowrap;
                 overflow-x: auto;
-                padding-right: 14px;
+                margin: 0 -20px;
+                padding: 2px 20px 4px;
                 scrollbar-width: none;
             }
 
-            .dock-actions::-webkit-scrollbar {
+            .actions::-webkit-scrollbar {
                 display: none;
+            }
+
+            .action {
+                flex: 0 0 104px;
+                min-height: 108px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .screen {
+                padding: 18px 20px 130px;
+            }
+
+            .top {
+                margin-bottom: 22px;
+            }
+
+            .hero {
+                height: 150px;
+                padding: 16px;
+                border-radius: 24px;
+            }
+
+            .hero-plus {
+                top: 16px;
+                left: 16px;
+            }
+
+            .hero-big {
+                font-size: 22px;
+            }
+
+            .status-card {
+                padding: 16px 18px;
+            }
+
+            .bar {
+                width: 92px;
+            }
+
+            .browse {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 8px;
+            }
+
+            .browse-tile {
+                width: 68px;
+                height: 68px;
+            }
+
+            .notes-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .editor-card {
+                padding: 18px 18px;
+                border-radius: 24px;
+            }
+
+            .editor-text {
+                font-size: 16px;
+            }
+
+            .fab {
+                right: 20px;
+                bottom: 104px;
+            }
+
+            .nav {
+                bottom: max(16px, env(safe-area-inset-bottom));
+            }
+
+            .nav-btn {
+                height: 50px;
+                min-width: 50px;
             }
         }
     </style>
 </head>
-<body data-theme="light" data-view="index">
-    <section class="index-view" aria-label="All notes">
-        <header class="bar">
-            <div class="logo"><span class="logo-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>AI Notes.</div>
-            <span class="spacer"></span>
-            <button class="icon-btn" id="themeToggle" aria-label="Switch light or dark theme"><span class="theme-icon"></span></button>
-            <button class="pill pill-new" id="newNoteBtn">New note</button>
+<body data-theme="light" data-view="home">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-17.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
+        <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+        <symbol id="i-note" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M8 7h8M8 11h8M8 15h5"/></symbol>
+        <symbol id="i-back" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></symbol>
+        <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+        <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
+        <symbol id="i-spark" viewBox="0 0 24 24"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0l1.58 6.14a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96l-6.14 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/></symbol>
+        <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.53 2.3a.53.53 0 0 1 .95 0l2.31 4.68a2.12 2.12 0 0 0 1.6 1.16l5.16.76a.53.53 0 0 1 .3.9l-3.74 3.64a2.12 2.12 0 0 0-.61 1.88l.88 5.14a.53.53 0 0 1-.77.56l-4.62-2.43a2.12 2.12 0 0 0-1.97 0L6.4 21.01a.53.53 0 0 1-.77-.56l.88-5.14a2.12 2.12 0 0 0-.61-1.88L2.16 9.8a.53.53 0 0 1 .3-.9l5.16-.76a2.12 2.12 0 0 0 1.6-1.16z"/></symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+        <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+        <symbol id="i-archive" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="5" rx="1.5"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8M10 12h4"/></symbol>
+        <symbol id="i-lines" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M7 8h10M7 12h10M7 16h6"/></symbol>
+        <symbol id="i-wand" viewBox="0 0 24 24"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z"/><path d="m14 7 3 3"/></symbol>
+        <symbol id="i-expand" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M14 7h3v3M10 17H7v-3M17 7l-4 4M7 17l4-4"/></symbol>
+        <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+        <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.59 2.59A2 2 0 0 0 11.17 2H4a2 2 0 0 0-2 2v7.17a2 2 0 0 0 .59 1.42l8.7 8.7a2.43 2.43 0 0 0 3.42 0l6.58-6.58a2.43 2.43 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1.5"/></symbol>
+        <symbol id="i-text" viewBox="0 0 24 24"><path d="M4 7V5h16v2M9 19h6M12 5v14"/></symbol>
+    </svg>
+
+    <!-- ===== Home ===== -->
+    <section class="screen" id="screen-home" aria-label="Home">
+        <header class="top">
+            <div class="hello">
+                <span class="avatar"><svg class="i"><use href="#i-user"/></svg></span>
+                <span id="greeting">Hi there 👋</span>
+            </div>
+            <div class="top-actions">
+                <button class="circle" data-action="search" aria-label="Search notes"><svg class="i"><use href="#i-search"/></svg></button>
+                <button class="circle" data-action="theme" aria-label="Switch light or dark theme">
+                    <svg class="i icon-sun"><use href="#i-sun"/></svg><svg class="i icon-moon"><use href="#i-moon"/></svg>
+                </button>
+            </div>
         </header>
 
-        <div class="search-wrap">
-            <input type="search" class="search" id="searchInput" placeholder="Search notes" aria-label="Search notes">
+        <div class="home-grid">
+            <div>
+                <h1 class="h1">My Notes</h1>
+                <p class="date-line" id="todayLine"></p>
+
+                <div class="hero-cards">
+                    <button class="hero hero-purple" data-action="new">
+                        <span class="hero-plus"><svg class="i"><use href="#i-plus"/></svg></span>
+                        <svg class="hero-deco" viewBox="0 0 100 100" fill="none" stroke="#fff" stroke-width="2">
+                            <path d="M10 60 50 40l40 20-40 20z"/><path d="M10 60v16l40 20V80M90 60v16L50 96"/><path d="M30 50l40 20M30 70l40-20M50 40v40"/><path d="M30 30 50 20l20 10-20 10z"/>
+                        </svg>
+                        <span class="hero-small">Create</span>
+                        <span class="hero-big">New Note</span>
+                    </button>
+                    <button class="hero hero-yellow" data-action="ask-last">
+                        <span class="hero-plus"><svg class="i"><use href="#i-spark"/></svg></span>
+                        <svg class="hero-deco" viewBox="0 0 100 100" fill="#fff">
+                            <rect x="14" y="58" width="18" height="40" rx="3"/><rect x="40" y="38" width="18" height="60" rx="3"/><rect x="66" y="16" width="18" height="82" rx="3"/>
+                        </svg>
+                        <span class="hero-small">Ask AI</span>
+                        <span class="hero-big">Last Note</span>
+                    </button>
+                </div>
+
+                <div class="status-card" id="statusCard">
+                    <div>
+                        <strong>Local AI</strong>
+                        <span class="sub">DeepSeek R1 via Ollama</span>
+                    </div>
+                    <div class="status-right">
+                        <span class="bar"><i></i></span>
+                        <span class="status-text" id="statusText">Checking…</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-side">
+                <div class="section-head">
+                    <h2>Recent Notes</h2>
+                    <button class="see-all" data-action="go-notes">See All</button>
+                </div>
+                <p class="count" id="homeCount"></p>
+                <div class="note-list" id="recentList"></div>
+            </div>
         </div>
-
-        <nav class="index-list" id="notesList" aria-label="Notes"></nav>
-
-        <footer class="index-foot">
-            <span id="noteCount">0 notes</span>
-            <span><span class="sq"></span>Saved on this device</span>
-        </footer>
     </section>
 
-    <section class="note-view" id="noteView" aria-label="Note">
-        <header class="note-bar">
-            <button class="pill" id="backBtn"><span aria-hidden="true">←</span><span><span class="back-long">All </span>notes</span></button>
-            <span class="spacer"></span>
-            <button class="pill" id="saveBtn">Save</button>
-            <button class="pill pill-danger" id="deleteBtn">Delete</button>
+    <!-- ===== All notes ===== -->
+    <section class="screen" id="screen-notes" aria-label="All notes">
+        <header class="top">
+            <span class="avatar"><svg class="i"><use href="#i-user"/></svg></span>
+            <div class="top-actions">
+                <button class="circle" data-action="search" aria-label="Search notes"><svg class="i"><use href="#i-search"/></svg></button>
+                <button class="circle" data-action="theme" aria-label="Switch light or dark theme">
+                    <svg class="i icon-sun"><use href="#i-sun"/></svg><svg class="i icon-moon"><use href="#i-moon"/></svg>
+                </button>
+            </div>
         </header>
 
-        <div class="note-scroll" id="noteScroll">
-            <article class="note-col">
-                <div class="note-meta"><span class="sq"></span><span id="docMeta"></span></div>
-                <input type="text" class="doc-title" id="noteTitleInput" placeholder="Untitled note" aria-label="Note title">
-                <div class="doc-bar"></div>
-                <textarea class="note-editor" id="noteEditor" placeholder="Start writing…" aria-label="Note text"></textarea>
-            </article>
+        <p class="label">Browse</p>
+        <div class="browse" id="browse">
+            <button class="browse-btn b-all active" data-filter="all"><span class="browse-tile"><svg class="i"><use href="#i-star"/></svg></span>All</button>
+            <button class="browse-btn b-today" data-filter="today"><span class="browse-tile"><svg class="i"><use href="#i-clock"/></svg></span>Today</button>
+            <button class="browse-btn b-week" data-filter="week"><span class="browse-tile"><svg class="i"><use href="#i-cal"/></svg></span>This week</button>
+            <button class="browse-btn b-older" data-filter="older"><span class="browse-tile"><svg class="i"><use href="#i-archive"/></svg></span>Older</button>
         </div>
 
-        <div class="dock" id="aiDock" aria-label="AI assistant">
-            <div class="dock-answer">
-                <div class="dock-answer-head">
-                    <span id="aiAnswerLabel">Answer</span>
-                    <button class="dock-clear" id="aiClear">Clear</button>
-                </div>
-                <div class="dock-answer-text" id="aiResponse" aria-live="polite"></div>
+        <div class="section-head">
+            <h2 id="listTitle">All Notes</h2>
+        </div>
+        <p class="count" id="notesCount"></p>
+
+        <div class="search-row" id="searchRow">
+            <label class="search-field">
+                <svg class="i"><use href="#i-search"/></svg>
+                <input type="search" id="searchInput" placeholder="Search notes" aria-label="Search notes">
+            </label>
+        </div>
+
+        <div class="note-list notes-grid" id="notesList"></div>
+
+        <button class="fab" data-action="new" aria-label="New note"><svg class="i"><use href="#i-note"/></svg></button>
+    </section>
+
+    <!-- ===== Editor ===== -->
+    <section class="screen" id="screen-editor" aria-label="Note">
+        <header class="top">
+            <button class="circle" data-action="back" aria-label="Back"><svg class="i"><use href="#i-back"/></svg></button>
+            <span class="top-title">Note</span>
+            <div class="top-actions">
+                <button class="circle circle-danger" id="deleteBtn" aria-label="Delete note"><svg class="i"><use href="#i-trash"/></svg></button>
+                <button class="circle circle-dark" id="saveBtn" aria-label="Save note"><svg class="i"><use href="#i-check"/></svg></button>
             </div>
-            <div class="dock-row">
-                <span class="dock-label" id="aiDockLabel">Checking for DeepSeek R1…</span>
-                <div class="dock-actions">
-                    <button class="chip" data-action="summarize">Summarize</button>
-                    <button class="chip" data-action="improve">Improve writing</button>
-                    <button class="chip" data-action="expand">Expand ideas</button>
-                    <button class="chip" data-action="questions">Ask me questions</button>
-                    <button class="chip" data-action="keywords">Pull out keywords</button>
+        </header>
+
+        <div class="editor-grid" id="editorGrid">
+            <div>
+                <div class="tags" id="editorTags"></div>
+                <input type="text" class="editor-title" id="noteTitleInput" placeholder="Untitled note" aria-label="Note title">
+                <div class="editor-card">
+                    <textarea class="editor-text" id="noteEditor" placeholder="Start writing…" aria-label="Note text"></textarea>
                 </div>
             </div>
+
+            <aside class="ai-side" id="aiSide" aria-label="AI assistant">
+                <div class="ai-head">
+                    <h2>Ask AI</h2>
+                    <span class="ai-pill" id="aiPill">Checking</span>
+                </div>
+                <div class="actions">
+                    <button class="action" data-ai="summarize"><svg class="i"><use href="#i-lines"/></svg>Summarize</button>
+                    <button class="action" data-ai="improve"><svg class="i"><use href="#i-wand"/></svg>Improve writing</button>
+                    <button class="action" data-ai="expand"><svg class="i"><use href="#i-expand"/></svg>Expand ideas</button>
+                    <button class="action" data-ai="questions"><svg class="i"><use href="#i-help"/></svg>Ask questions</button>
+                    <button class="action" data-ai="keywords"><svg class="i"><use href="#i-tag"/></svg>Keywords</button>
+                </div>
+                <p class="ai-hint" id="aiHint">Runs on your machine with DeepSeek R1.</p>
+
+                <div class="answer" id="answer" aria-live="polite">
+                    <div class="answer-head">
+                        <span class="spark"><svg class="i"><use href="#i-spark"/></svg></span>
+                        <span id="answerLabel">Summary</span>
+                        <button class="x" id="answerClose" aria-label="Clear answer"><svg class="i"><use href="#i-x"/></svg></button>
+                    </div>
+                    <div class="answer-text" id="aiResponse"></div>
+                </div>
+            </aside>
         </div>
     </section>
+
+    <nav class="nav" aria-label="Main">
+        <button class="nav-btn" data-action="new" aria-label="New note"><span class="ic"><svg class="i"><use href="#i-plus"/></svg></span><span class="lbl">New</span></button>
+        <button class="nav-btn" data-tab="home" aria-label="Home"><span class="ic"><svg class="i"><use href="#i-home"/></svg></span><span class="lbl">Home</span></button>
+        <button class="nav-btn" data-tab="notes" aria-label="Notes"><span class="ic"><svg class="i"><use href="#i-note"/></svg></span><span class="lbl">Notes</span></button>
+        <button class="nav-btn" data-action="search" aria-label="Search"><span class="ic"><svg class="i"><use href="#i-search"/></svg></span><span class="lbl">Search</span></button>
+    </nav>
 
     <script>
-        const NOTE_COLORS = ['blue', 'yellow', 'pink', 'green', 'orange', 'lilac'];
-        const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const TINTS = ['lav', 'sky', 'cream', 'pink', 'mint'];
+        const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         const ANSWER_LABELS = {
             summarize: 'Summary',
             improve: 'Improved writing',
@@ -790,11 +1294,16 @@
             questions: 'Questions to explore',
             keywords: 'Keywords'
         };
+        const FILTER_TITLES = { all: 'All Notes', today: 'Today', week: 'This Week', older: 'Older' };
 
-        function colorFor(id) {
+        function tintFor(id) {
             let h = 0;
             for (const ch of String(id)) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-            return `var(--${NOTE_COLORS[h % NOTE_COLORS.length]})`;
+            return TINTS[h % TINTS.length];
+        }
+
+        function icon(name) {
+            return `<svg class="i"><use href="#i-${name}"/></svg>`;
         }
 
         class AINotesApp {
@@ -802,6 +1311,7 @@
                 this.notes = this.loadNotes();
                 this.currentNote = null;
                 this.isAIConnected = false;
+                this.filter = 'all';
                 this.theme = this.loadTheme();
                 this.init();
             }
@@ -825,12 +1335,10 @@
                 this.route();
             }
 
+            /* ---------- Storage & theme ---------- */
+
             loadTheme() {
                 return localStorage.getItem('ai-notes-theme') || 'light';
-            }
-
-            saveTheme() {
-                localStorage.setItem('ai-notes-theme', this.theme);
             }
 
             applyTheme() {
@@ -840,128 +1348,7 @@
             toggleTheme() {
                 this.theme = this.theme === 'light' ? 'dark' : 'light';
                 this.applyTheme();
-                this.saveTheme();
-            }
-
-            bindEvents() {
-                window.addEventListener('hashchange', () => {
-                    this.flushSave();
-                    this.route();
-                });
-
-                document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
-                document.getElementById('newNoteBtn').addEventListener('click', () => this.createNewNote());
-                document.getElementById('searchInput').addEventListener('input', () => this.renderIndex());
-
-                document.getElementById('notesList').addEventListener('click', (e) => {
-                    const row = e.target.closest('.row');
-                    if (row) this.openNote(row.dataset.id);
-                });
-
-                document.getElementById('backBtn').addEventListener('click', () => this.goIndex());
-                document.getElementById('saveBtn').addEventListener('click', () => this.saveCurrentNote());
-                document.getElementById('deleteBtn').addEventListener('click', () => this.deleteCurrentNote());
-
-                const editor = document.getElementById('noteEditor');
-                editor.addEventListener('input', () => {
-                    this.autosize();
-                    this.updateMeta();
-                    this.autoSave();
-                });
-                document.getElementById('noteTitleInput').addEventListener('input', () => this.autoSave());
-
-                document.querySelectorAll('.chip').forEach(chip => {
-                    chip.addEventListener('click', (e) => {
-                        this.processAIRequest(e.currentTarget.dataset.action, e.currentTarget);
-                    });
-                });
-                document.getElementById('aiClear').addEventListener('click', () => this.clearAnswer());
-
-                window.addEventListener('resize', () => this.autosize());
-
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && document.body.dataset.view === 'note') {
-                        this.goIndex();
-                        return;
-                    }
-                    if (e.ctrlKey || e.metaKey) {
-                        switch (e.key) {
-                            case 's':
-                                e.preventDefault();
-                                this.saveCurrentNote();
-                                break;
-                            case 'n':
-                                e.preventDefault();
-                                this.createNewNote();
-                                break;
-                            case 'd':
-                                e.preventDefault();
-                                this.toggleTheme();
-                                break;
-                        }
-                    }
-                });
-            }
-
-            route() {
-                const id = decodeURIComponent(location.hash.slice(1));
-                const note = this.notes.find(n => n.id === id);
-                if (note) {
-                    this.showNote(note);
-                } else {
-                    this.showIndex();
-                }
-            }
-
-            openNote(id) {
-                if (decodeURIComponent(location.hash.slice(1)) === id) {
-                    this.route();
-                } else {
-                    location.hash = encodeURIComponent(id);
-                }
-            }
-
-            goIndex() {
-                this.flushSave();
-                if (location.hash) {
-                    location.hash = '';
-                } else {
-                    this.showIndex();
-                }
-            }
-
-            showIndex() {
-                this.currentNote = null;
-                document.body.dataset.view = 'index';
-                document.title = 'AI Notes';
-                this.renderIndex();
-            }
-
-            showNote(note) {
-                this.currentNote = note;
-                document.body.dataset.view = 'note';
-                document.title = `${note.title} · AI Notes`;
-                document.getElementById('noteView').style.setProperty('--c', colorFor(note.id));
-                document.getElementById('noteTitleInput').value = note.title;
-                document.getElementById('noteEditor').value = note.content;
-                document.getElementById('noteScroll').scrollTop = 0;
-                this.clearAnswer();
-                this.updateMeta();
-                this.autosize();
-
-                if (this.focusTitleNext) {
-                    this.focusTitleNext = false;
-                    const titleInput = document.getElementById('noteTitleInput');
-                    titleInput.focus();
-                    titleInput.select();
-                }
-            }
-
-            autosize() {
-                const editor = document.getElementById('noteEditor');
-                if (document.body.dataset.view !== 'note') return;
-                editor.style.height = 'auto';
-                editor.style.height = `${editor.scrollHeight}px`;
+                localStorage.setItem('ai-notes-theme', this.theme);
             }
 
             loadNotes() {
@@ -983,6 +1370,287 @@
                 }
             }
 
+            sortedNotes() {
+                return [...this.notes].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+            }
+
+            /* ---------- Events ---------- */
+
+            bindEvents() {
+                window.addEventListener('hashchange', () => {
+                    this.flushSave();
+                    this.route();
+                });
+
+                document.addEventListener('click', (e) => {
+                    const actionEl = e.target.closest('[data-action]');
+                    if (actionEl) {
+                        this.handleAction(actionEl.dataset.action);
+                        return;
+                    }
+                    const tab = e.target.closest('[data-tab]');
+                    if (tab) {
+                        this.go(tab.dataset.tab === 'notes' ? '#/notes' : '#/');
+                        return;
+                    }
+                    const card = e.target.closest('.note-card');
+                    if (card) {
+                        this.go(`#/note/${encodeURIComponent(card.dataset.id)}`);
+                        return;
+                    }
+                    const filterBtn = e.target.closest('[data-filter]');
+                    if (filterBtn) {
+                        this.filter = filterBtn.dataset.filter;
+                        this.renderNotes();
+                        return;
+                    }
+                    const ai = e.target.closest('[data-ai]');
+                    if (ai) this.processAIRequest(ai.dataset.ai, ai);
+                });
+
+                document.getElementById('searchInput').addEventListener('input', () => this.renderNotes());
+                document.getElementById('saveBtn').addEventListener('click', () => this.saveCurrentNote());
+                document.getElementById('deleteBtn').addEventListener('click', () => this.deleteCurrentNote());
+                document.getElementById('answerClose').addEventListener('click', () => this.clearAnswer());
+
+                document.getElementById('noteEditor').addEventListener('input', () => {
+                    this.autosize();
+                    this.renderEditorTags();
+                    this.autoSave();
+                });
+                document.getElementById('noteTitleInput').addEventListener('input', () => this.autoSave());
+                window.addEventListener('resize', () => this.autosize());
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && document.body.dataset.view === 'editor') {
+                        this.goBack();
+                        return;
+                    }
+                    if (e.ctrlKey || e.metaKey) {
+                        switch (e.key) {
+                            case 's':
+                                e.preventDefault();
+                                this.saveCurrentNote();
+                                break;
+                            case 'n':
+                                e.preventDefault();
+                                this.createNewNote();
+                                break;
+                            case 'd':
+                                e.preventDefault();
+                                this.toggleTheme();
+                                break;
+                        }
+                    }
+                });
+            }
+
+            handleAction(action) {
+                switch (action) {
+                    case 'new': this.createNewNote(); break;
+                    case 'theme': this.toggleTheme(); break;
+                    case 'search': this.openSearch(); break;
+                    case 'go-notes': this.go('#/notes'); break;
+                    case 'back': this.goBack(); break;
+                    case 'ask-last': this.askAboutLastNote(); break;
+                }
+            }
+
+            /* ---------- Routing ---------- */
+
+            go(hash) {
+                if (location.hash === hash || (hash === '#/' && !location.hash)) {
+                    this.route();
+                } else {
+                    location.hash = hash;
+                }
+            }
+
+            goBack() {
+                this.flushSave();
+                this.go(this.cameFromNotes ? '#/notes' : '#/');
+            }
+
+            route() {
+                const hash = location.hash;
+                const noteMatch = hash.match(/^#\/note\/(.+)$/);
+
+                if (noteMatch) {
+                    const note = this.notes.find(n => n.id === decodeURIComponent(noteMatch[1]));
+                    if (note) {
+                        const from = document.body.dataset.view;
+                        if (from !== 'editor') this.cameFromNotes = from === 'notes';
+                        this.showScreen('editor');
+                        this.openEditor(note);
+                        return;
+                    }
+                }
+
+                this.currentNote = null;
+                if (hash === '#/notes') {
+                    this.showScreen('notes');
+                    this.renderNotes();
+                } else {
+                    this.showScreen('home');
+                    this.renderHome();
+                }
+            }
+
+            showScreen(view) {
+                document.body.dataset.view = view;
+                document.querySelectorAll('.screen').forEach(s => {
+                    s.classList.toggle('active', s.id === `screen-${view}`);
+                });
+                document.querySelectorAll('.nav-btn[data-tab]').forEach(b => {
+                    b.classList.toggle('active', b.dataset.tab === view);
+                });
+                window.scrollTo(0, 0);
+            }
+
+            /* ---------- Home ---------- */
+
+            renderHome() {
+                const now = new Date();
+                const hour = now.getHours();
+                const part = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+                document.getElementById('greeting').textContent = `${part} 👋`;
+                document.getElementById('todayLine').textContent =
+                    `Today ${MONTHS[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+
+                const notes = this.sortedNotes();
+                document.getElementById('homeCount').textContent = this.countLabel(notes.length);
+                const list = document.getElementById('recentList');
+                list.innerHTML = notes.length
+                    ? notes.slice(0, 4).map(n => this.cardHTML(n)).join('')
+                    : '<div class="empty"><strong>No notes yet</strong>Tap Create New Note to write your first one.</div>';
+            }
+
+            askAboutLastNote() {
+                const last = this.sortedNotes()[0];
+                if (!last) {
+                    this.createNewNote();
+                    return;
+                }
+                this.focusAINext = true;
+                this.go(`#/note/${encodeURIComponent(last.id)}`);
+            }
+
+            /* ---------- Notes list ---------- */
+
+            openSearch() {
+                if (document.body.dataset.view !== 'notes') this.go('#/notes');
+                requestAnimationFrame(() => {
+                    document.getElementById('searchRow').classList.add('show');
+                    document.getElementById('searchInput').focus();
+                });
+            }
+
+            daysAgo(dateString) {
+                const date = new Date(dateString);
+                const startOf = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+                return Math.round((startOf(new Date()) - startOf(date)) / 86400000);
+            }
+
+            renderNotes() {
+                document.querySelectorAll('[data-filter]').forEach(b => {
+                    b.classList.toggle('active', b.dataset.filter === this.filter);
+                });
+                document.getElementById('listTitle').textContent = FILTER_TITLES[this.filter];
+
+                const query = document.getElementById('searchInput').value.trim().toLowerCase();
+                const notes = this.sortedNotes().filter(note => {
+                    const days = this.daysAgo(note.updatedAt);
+                    if (this.filter === 'today' && days > 0) return false;
+                    if (this.filter === 'week' && days > 6) return false;
+                    if (this.filter === 'older' && days <= 6) return false;
+                    if (query && !note.title.toLowerCase().includes(query) && !note.content.toLowerCase().includes(query)) return false;
+                    return true;
+                });
+
+                document.getElementById('notesCount').textContent = this.countLabel(notes.length);
+                const list = document.getElementById('notesList');
+
+                if (notes.length === 0) {
+                    const msg = query
+                        ? `<strong>No matches</strong>Nothing in ${FILTER_TITLES[this.filter].toLowerCase()} mentions “${this.escapeHtml(query)}”.`
+                        : this.filter === 'all'
+                            ? '<strong>No notes yet</strong>Tap the note button to write your first one.'
+                            : `<strong>Nothing here</strong>No notes were edited ${this.filter === 'older' ? 'more than a week ago' : this.filter === 'today' ? 'today' : 'this week'}.`;
+                    list.innerHTML = `<div class="empty">${msg}</div>`;
+                    return;
+                }
+
+                list.innerHTML = notes.map((n, i) => this.cardHTML(n, i)).join('');
+            }
+
+            countLabel(n) {
+                return `${n} ${n === 1 ? 'Note' : 'Notes'}`;
+            }
+
+            wordCount(text) {
+                const t = text.trim();
+                return t ? t.split(/\s+/).length : 0;
+            }
+
+            shortDate(dateString) {
+                const d = new Date(dateString);
+                return `${d.getDate()} ${MONTHS[d.getMonth()].slice(0, 3)} ${d.getFullYear()}`;
+            }
+
+            cardHTML(note, i = 0) {
+                const words = this.wordCount(note.content);
+                const preview = note.content.trim() ? note.content.trim().slice(0, 140) : 'Empty note';
+                return `
+                    <button type="button" class="note-card t-${tintFor(note.id)}" data-id="${this.escapeHtml(note.id)}"
+                            style="animation-delay:${Math.min(i, 8) * 30}ms">
+                        <h3>${this.escapeHtml(note.title)}</h3>
+                        <p>${this.escapeHtml(preview)}</p>
+                        <span class="tags">
+                            <span class="tag">${icon('cal')}${this.shortDate(note.updatedAt)}</span>
+                            <span class="tag tag-2">${icon('text')}${words} ${words === 1 ? 'word' : 'words'}</span>
+                        </span>
+                    </button>`;
+            }
+
+            /* ---------- Editor ---------- */
+
+            openEditor(note) {
+                this.currentNote = note;
+                document.getElementById('editorGrid').className = `editor-grid t-${tintFor(note.id)}`;
+                document.getElementById('noteTitleInput').value = note.title;
+                document.getElementById('noteEditor').value = note.content;
+                this.clearAnswer();
+                this.renderEditorTags();
+                this.autosize();
+
+                if (this.focusTitleNext) {
+                    this.focusTitleNext = false;
+                    const t = document.getElementById('noteTitleInput');
+                    t.focus();
+                    t.select();
+                }
+                if (this.focusAINext) {
+                    this.focusAINext = false;
+                    document.getElementById('aiSide').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.querySelector('.action').focus({ preventScroll: true });
+                }
+            }
+
+            renderEditorTags() {
+                if (!this.currentNote) return;
+                const words = this.wordCount(document.getElementById('noteEditor').value);
+                document.getElementById('editorTags').innerHTML =
+                    `<span class="tag">${icon('cal')}${this.shortDate(this.currentNote.updatedAt)}</span>` +
+                    `<span class="tag tag-2">${icon('text')}${words} ${words === 1 ? 'word' : 'words'}</span>`;
+            }
+
+            autosize() {
+                if (document.body.dataset.view !== 'editor') return;
+                const editor = document.getElementById('noteEditor');
+                editor.style.height = 'auto';
+                editor.style.height = `${editor.scrollHeight}px`;
+            }
+
             createNewNote() {
                 this.flushSave();
                 const newNote = {
@@ -992,19 +1660,10 @@
                     createdAt: new Date().toISOString(),
                     updatedAt: new Date().toISOString()
                 };
-
                 this.notes.unshift(newNote);
                 this.saveNotes();
                 this.focusTitleNext = true;
-                this.openNote(newNote.id);
-            }
-
-            updateMeta() {
-                if (!this.currentNote) return;
-                const text = document.getElementById('noteEditor').value.trim();
-                const words = text ? text.split(/\s+/).length : 0;
-                document.getElementById('docMeta').textContent =
-                    `${this.formatEdited(this.currentNote.updatedAt)} · ${words} ${words === 1 ? 'word' : 'words'}`;
+                this.go(`#/note/${encodeURIComponent(newNote.id)}`);
             }
 
             saveCurrentNote(silent = false) {
@@ -1015,72 +1674,42 @@
                 this.currentNote.title = document.getElementById('noteTitleInput').value.trim() || 'Untitled note';
                 this.currentNote.content = document.getElementById('noteEditor').value;
                 this.currentNote.updatedAt = new Date().toISOString();
-
                 this.saveNotes();
-                this.updateMeta();
-                document.title = `${this.currentNote.title} · AI Notes`;
-                if (!silent) this.showToast('Saved');
+                this.renderEditorTags();
+                if (!silent) this.showToast('Note saved');
             }
 
             autoSave() {
-                if (this.currentNote) {
-                    clearTimeout(this.autoSaveTimeout);
-                    this.autoSaveTimeout = setTimeout(() => this.saveCurrentNote(true), 1000);
-                }
+                if (!this.currentNote) return;
+                clearTimeout(this.autoSaveTimeout);
+                this.autoSaveTimeout = setTimeout(() => this.saveCurrentNote(true), 1000);
             }
 
             flushSave() {
-                if (this.autoSaveTimeout && this.currentNote) {
-                    this.saveCurrentNote(true);
-                }
+                if (this.autoSaveTimeout && this.currentNote) this.saveCurrentNote(true);
             }
 
             deleteCurrentNote() {
                 if (!this.currentNote) return;
+                if (!confirm('Delete this note? This can’t be undone.')) return;
 
-                if (confirm('Delete this note? This can’t be undone.')) {
-                    clearTimeout(this.autoSaveTimeout);
-                    this.autoSaveTimeout = null;
-                    this.notes = this.notes.filter(n => n.id !== this.currentNote.id);
-                    this.saveNotes();
-                    this.currentNote = null;
-                    this.goIndex();
-                    this.showToast('Note deleted');
-                }
+                clearTimeout(this.autoSaveTimeout);
+                this.autoSaveTimeout = null;
+                this.notes = this.notes.filter(n => n.id !== this.currentNote.id);
+                this.saveNotes();
+                this.currentNote = null;
+                this.go(this.cameFromNotes ? '#/notes' : '#/');
+                this.showToast('Note deleted');
             }
 
-            renderIndex() {
-                const list = document.getElementById('notesList');
-                const query = document.getElementById('searchInput').value.trim().toLowerCase();
-                const notes = query
-                    ? this.notes.filter(n => n.title.toLowerCase().includes(query) || n.content.toLowerCase().includes(query))
-                    : this.notes;
-
-                const count = this.notes.length;
-                document.getElementById('noteCount').textContent = `${count} ${count === 1 ? 'note' : 'notes'}`;
-
-                if (notes.length === 0) {
-                    list.innerHTML = `<p class="index-empty">${query ? 'No matches' : 'No notes yet'}</p>`;
-                    return;
-                }
-
-                list.innerHTML = notes.map((note, i) => `
-                    <button type="button" class="row" data-id="${this.escapeHtml(note.id)}"
-                            style="--c: ${colorFor(note.id)}; animation-delay: ${Math.min(i, 8) * 40}ms">
-                        <span class="row-title">${this.escapeHtml(note.title)}</span>
-                        <span class="row-note"><span class="sq"></span>${this.formatShort(note.updatedAt)}</span>
-                    </button>`).join('');
-            }
+            /* ---------- AI ---------- */
 
             async checkAIConnection() {
                 try {
                     const response = await fetch('http://localhost:11434/api/tags');
                     if (response.ok) {
                         const data = await response.json();
-                        const hasDeepSeek = data.models?.some(model =>
-                            model.name.includes('deepseek-r1:1.5b')
-                        );
-
+                        const hasDeepSeek = data.models?.some(model => model.name.includes('deepseek-r1:1.5b'));
                         this.isAIConnected = hasDeepSeek;
                         this.updateAIStatus(hasDeepSeek);
                     } else {
@@ -1093,23 +1722,28 @@
             }
 
             updateAIStatus(connected) {
-                document.getElementById('aiDock').classList.toggle('offline', !connected);
-                document.getElementById('aiDockLabel').textContent = connected
-                    ? 'Ask DeepSeek R1 to'
-                    : 'AI offline. Start Ollama, then reload.';
-                document.querySelectorAll('.chip').forEach(chip => {
-                    chip.setAttribute('aria-disabled', String(!connected));
-                });
+                const card = document.getElementById('statusCard');
+                card.classList.toggle('ready', connected);
+                card.classList.toggle('offline', !connected);
+                document.getElementById('statusText').textContent = connected ? 'Ready' : 'Offline';
+
+                const pill = document.getElementById('aiPill');
+                pill.className = `ai-pill ${connected ? 'ready' : 'offline'}`;
+                pill.textContent = connected ? 'Ready' : 'Offline';
+
+                document.getElementById('aiHint').textContent = connected
+                    ? 'Runs on your machine with DeepSeek R1.'
+                    : 'Start Ollama with deepseek-r1:1.5b, then reload to use these.';
             }
 
             clearAnswer() {
-                document.getElementById('aiDock').classList.remove('has-answer');
+                document.getElementById('answer').classList.remove('show');
                 document.getElementById('aiResponse').textContent = '';
             }
 
-            async processAIRequest(action, chip) {
+            async processAIRequest(action, tile) {
                 if (!this.isAIConnected) {
-                    this.showToast('AI is offline. Start Ollama with deepseek-r1:1.5b, then reload.', 'error');
+                    this.showToast('AI is offline. Start Ollama, then reload.', 'error');
                     return;
                 }
 
@@ -1119,24 +1753,24 @@
                     return;
                 }
 
-                const dock = document.getElementById('aiDock');
+                const answer = document.getElementById('answer');
                 const aiResponse = document.getElementById('aiResponse');
-                document.getElementById('aiAnswerLabel').textContent = ANSWER_LABELS[action] || 'Answer';
-                dock.classList.add('has-answer');
-                chip.classList.add('running');
+                document.getElementById('answerLabel').textContent = ANSWER_LABELS[action] || 'Answer';
+                answer.classList.add('show');
+                tile.classList.add('running');
                 aiResponse.textContent = 'Working on it…';
 
                 try {
                     const prompt = this.generatePrompt(action, content);
                     const response = await this.callOllama(prompt);
-                    const answer = (response || '').replace(/<think>[\s\S]*?<\/think>/g, '').trim();
-                    aiResponse.textContent = answer || 'The model returned an empty answer. Try again.';
+                    const text = (response || '').replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+                    aiResponse.textContent = text || 'The model returned an empty answer. Try again.';
                 } catch (error) {
                     console.error('AI request failed:', error);
                     aiResponse.textContent = 'The model didn’t respond. Check that Ollama is running, then try again.';
                     this.showToast('AI request failed', 'error');
                 } finally {
-                    chip.classList.remove('running');
+                    tile.classList.remove('running');
                 }
             }
 
@@ -1148,16 +1782,13 @@
                     questions: `Based on this text, generate 5 thoughtful questions that could help explore the topic deeper:\n\n${content}`,
                     keywords: `Extract the main keywords and key concepts from this text:\n\n${content}`
                 };
-
                 return prompts[action] || content;
             }
 
             async callOllama(prompt) {
                 const response = await fetch('http://localhost:11434/api/generate', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         model: 'deepseek-r1:1.5b',
                         prompt: prompt,
@@ -1173,42 +1804,19 @@
                 return data.response;
             }
 
+            /* ---------- Helpers ---------- */
+
             showToast(message, type = 'success') {
                 const toast = document.createElement('div');
                 toast.className = `toast ${type}`;
                 toast.setAttribute('role', 'status');
-                const mark = document.createElement('span');
-                mark.className = 'sq';
-                const text = document.createElement('span');
-                text.textContent = message;
-                toast.append(mark, text);
+                toast.textContent = message;
                 document.body.appendChild(toast);
-
-                setTimeout(() => toast.classList.add('show'), 50);
+                requestAnimationFrame(() => toast.classList.add('show'));
                 setTimeout(() => {
                     toast.classList.remove('show');
-                    setTimeout(() => toast.remove(), 400);
-                }, 3000);
-            }
-
-            daysAgo(dateString) {
-                const date = new Date(dateString);
-                const startOf = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
-                return Math.round((startOf(new Date()) - startOf(date)) / 86400000);
-            }
-
-            formatShort(dateString) {
-                const days = this.daysAgo(dateString);
-                const date = new Date(dateString);
-                if (days <= 0) return 'Today';
-                if (days === 1) return 'Yesterday';
-                if (days < 7) return `${days} days ago`;
-                return `${date.getDate()} ${MONTHS[date.getMonth()]}`;
-            }
-
-            formatEdited(dateString) {
-                const short = this.formatShort(dateString);
-                return /^\d+ [A-Z]/.test(short) ? `Edited ${short}` : `Edited ${short.toLowerCase()}`;
+                    setTimeout(() => toast.remove(), 300);
+                }, 2600);
             }
 
             escapeHtml(text) {
