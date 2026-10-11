@@ -143,23 +143,31 @@
             margin-bottom: 28px;
         }
 
-        .hello {
+        .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 15px;
-            font-weight: 600;
+            gap: 10px;
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
-        .avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
+        .brand-mark {
+            width: 40px;
+            height: 40px;
+            border-radius: 13px;
             background: var(--grad);
             color: #fff;
             display: grid;
             place-items: center;
             flex-shrink: 0;
+        }
+
+        .greeting {
+            margin-bottom: 2px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-2);
         }
 
         .top-actions {
@@ -1118,7 +1126,6 @@
         <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
         <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
         <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
-        <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
         <symbol id="i-spark" viewBox="0 0 24 24"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0l1.58 6.14a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96l-6.14 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/></symbol>
         <symbol id="i-star" viewBox="0 0 24 24"><path d="M11.53 2.3a.53.53 0 0 1 .95 0l2.31 4.68a2.12 2.12 0 0 0 1.6 1.16l5.16.76a.53.53 0 0 1 .3.9l-3.74 3.64a2.12 2.12 0 0 0-.61 1.88l.88 5.14a.53.53 0 0 1-.77.56l-4.62-2.43a2.12 2.12 0 0 0-1.97 0L6.4 21.01a.53.53 0 0 1-.77-.56l.88-5.14a2.12 2.12 0 0 0-.61-1.88L2.16 9.8a.53.53 0 0 1 .3-.9l5.16-.76a2.12 2.12 0 0 0 1.6-1.16z"/></symbol>
         <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
@@ -1135,10 +1142,7 @@
     <!-- ===== Home ===== -->
     <section class="screen" id="screen-home" aria-label="Home">
         <header class="top">
-            <div class="hello">
-                <span class="avatar"><svg class="i"><use href="#i-user"/></svg></span>
-                <span id="greeting">Hi there 👋</span>
-            </div>
+            <span class="brand"><span class="brand-mark"><svg class="i"><use href="#i-note"/></svg></span>AI Notes</span>
             <div class="top-actions">
                 <button class="circle" data-action="search" aria-label="Search notes"><svg class="i"><use href="#i-search"/></svg></button>
                 <button class="circle" data-action="theme" aria-label="Switch light or dark theme">
@@ -1149,6 +1153,7 @@
 
         <div class="home-grid">
             <div>
+                <p class="greeting" id="greeting"></p>
                 <h1 class="h1">My Notes</h1>
                 <p class="date-line" id="todayLine"></p>
 
@@ -1197,7 +1202,7 @@
     <!-- ===== All notes ===== -->
     <section class="screen" id="screen-notes" aria-label="All notes">
         <header class="top">
-            <span class="avatar"><svg class="i"><use href="#i-user"/></svg></span>
+            <span class="brand"><span class="brand-mark"><svg class="i"><use href="#i-note"/></svg></span>AI Notes</span>
             <div class="top-actions">
                 <button class="circle" data-action="search" aria-label="Search notes"><svg class="i"><use href="#i-search"/></svg></button>
                 <button class="circle" data-action="theme" aria-label="Switch light or dark theme">
