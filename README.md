@@ -2,6 +2,8 @@
 
 **AI Notes** is a modern, elegant, and responsive note-taking web app enhanced with local AI capabilities. Built with pure HTML, CSS, and JavaScript, it integrates with the `deepseek-r1:1.5b` model running via Ollama to bring advanced AI features right into your browser — no external server required.
 
+**Case study:** [harshith-nayaka-l-portfolio.vercel.app/work/ai-notes](https://harshith-nayaka-l-portfolio.vercel.app/work/ai-notes): the problem, the architecture and the engineering decisions behind AI Notes.
+
 ---
 
 ## 📌 Description
